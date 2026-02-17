@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Header } from "@/components/navigations/Header";
-import { PageTransition } from "@/components/transitions/PageTransition";
+import  PageTransition  from "@/components/transitions/PageTransition";
 
 export default function RootLayout({
   children,
