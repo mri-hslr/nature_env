@@ -6,3 +6,7 @@ body {
   min-height: 100%;
   overscroll-behavior-y: none;
 }
+/* Add to app/globals.css */
+.no-scroll {
+  overflow: hidden !important;
+}

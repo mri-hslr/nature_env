@@ -1,6 +1,9 @@
+// app/layout.tsx
 import "./globals.css";
 import { Header } from "@/components/navigations/Header";
-import  PageTransition  from "@/components/transitions/PageTransition";
+import PageTransition from "@/components/transitions/PageTransition";
+import { IntroProvider } from "@/app/context/IntroContext";
+import { MontageIntro } from "@/components/motion/MontageIntro";
 
 export default function RootLayout({
   children,
@@ -9,13 +12,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="antialiased">
-        <Header />
-
-        {/* Pages control their own background */}
-        <PageTransition>
-          {children}
-        </PageTransition>
+      <body className="antialiased bg-black text-white">
+        <IntroProvider>
+          {/* The MontageIntro will live here, sitting above the content */}
+          <MontageIntro />
+          
+          <Header />
+          <PageTransition>
+            <main className="relative">
+              {children}
+            </main>
+          </PageTransition>
+        </IntroProvider>
       </body>
     </html>
   );
