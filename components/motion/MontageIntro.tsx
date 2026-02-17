@@ -7,20 +7,18 @@ import { useIntro } from "@/app/context/IntroContext";
 import { ScribbleCanvas } from "./ScribbleCanvas";
 
 const MONTAGE_ASSETS = [
-  "https://images.unsplash.com/photo-1473448912268-2022ce9509d8?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1439405326854-015177fe7821?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1500627760312-ad3016a401c1?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1426604966848-d7adac402bff?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1505761671935-60b3a7427bad?q=80&w=2000&auto=format&fit=crop",
-  "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2000&auto=format&fit=crop",
-  "/hero.mp4", 
-];
+    "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1501854140801-50d01698950b?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1465146633011-14f8e0781093?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1586348943529-beaae6c28db9?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=2000&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=2000&auto=format&fit=crop",
+    "/hero.mp4", 
+  ];
 
 export const MontageIntro = () => {
   const { isIntroActive, isComplete, setIntroComplete } = useIntro();
@@ -76,8 +74,8 @@ export const MontageIntro = () => {
           opacity: 1
         }}
         transition={{
-          duration: 1.4, // SLOWER CINEMATIC ZOOM
-          ease: [0.22, 1, 0.36, 1] // Quintic ease-out for a smooth settle
+          duration: 1.4, 
+          ease: [0.22, 1, 0.36, 1] 
         }}
         onAnimationComplete={() => {
           if (isZooming) setIntroComplete();
