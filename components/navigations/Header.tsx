@@ -18,59 +18,35 @@ const navItems = [
     { name: "FAQ", href: "/support" },  
   ];
 
-export function Header() {
-  const pathname = usePathname();
-  const { isComplete } = useIntro(); // Added Intro State
-
-  return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center p-6 pointer-events-none">
-      <AnimatePresence>
-        {/* The Header only renders its motion.nav when isComplete is true.
-           This ensures it stays hidden during the cinematic montage and zoom.
-        */}
-        {isComplete && (
-          <motion.nav
-            key={pathname}
-            initial={{ y: -20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -20, opacity: 0 }}
-            transition={{
-              type: "spring",
-              stiffness: 260,
-              damping: 20,
-              delay: 0.1 // Slight delay to let the Hero text lead the motion
-            }}
-            className="pointer-events-auto flex items-center gap-1 px-3 py-2 bg-white/80 backdrop-blur-md border border-neutral-200 rounded-full shadow-sm"
+  export const Header = () => {
+    return (
+      <nav className="absolute top-0 left-0 w-full z-[100] px-8 py-10 flex items-baseline justify-between pointer-events-auto">
+        {/* LEFT: BRANDING */}
+        <div className="flex items-center gap-2">
+          <Link 
+            href="/" 
+            className="text-white text-xs font-medium uppercase tracking-[0.4em] hover:opacity-70 transition-opacity duration-300"
           >
-            {navItems.map((item) => {
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className="relative px-4 py-1.5 text-sm font-medium transition-colors hover:text-neutral-900"
-                  style={{ color: isActive ? "#000" : "#666" }}
-                >
-                  <span className="relative z-10">{item.name}</span>
-                  
-                  {isActive && (
-                    <motion.div
-                      layoutId="nav-active-pill"
-                      className="absolute inset-0 bg-neutral-100 rounded-full -z-0"
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30,
-                      }}
-                    />
-                  )}
-                </Link>
-              );
-            })}
-          </motion.nav>
-        )}
-      </AnimatePresence>
-    </header>
-  );
-}
+            Nature / Ecosystem
+          </Link>
+        </div>
+  
+        {/* CENTER: EMPTY (ICEBERG LOGIC) */}
+        <div className="hidden md:block" />
+  
+        {/* RIGHT: NAVIGATION LINKS */}
+        <ul className="flex items-center gap-8">
+          {navItems.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                className="text-white text-[10px] font-light uppercase tracking-[0.3em] hover:opacity-50 transition-opacity duration-300"
+              >
+                {link.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    );
+  };  
