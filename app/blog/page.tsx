@@ -1,166 +1,162 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { PageIntro } from "@/components/page/PageIntro";
-import { PageSection } from "@/components/page/PageSection";
-import { PinnedNarrative } from "@/components/pinned/PinnedNarrative";
-import { useNarrativeMotion } from "@/components/pinned/useNarrativeMotion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+
+const posts = [
+  {
+    id: "01",
+    title: "When does an app become Web3?",
+    author: "Rajat Mukherjee",
+    date: "Jan 16",
+    readTime: "7 min read",
+    desc: "An app becomes Web3 the moment user value is cryptographically owned, not when money is paid. Precise distinctions between Layer Web2 and Web3 Identity.",
+    tag: "TECHNOLOGY",
+    img: "https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "02",
+    title: "Eco-Economics in the Digital Age",
+    author: "Iceberg Editorial",
+    date: "Feb 02",
+    readTime: "12 min read",
+    desc: "Exploring how blockchain frameworks can incentivize sustainable resource management and carbon credit transparency.",
+    tag: "ECONOMICS",
+    img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "03",
+    title: "Indigenous Art & Craft Preservation",
+    author: "Cultural Division",
+    date: "Feb 10",
+    readTime: "5 min read",
+    desc: "Using NFTs as a provenance layer to protect and monetize traditional artisan craftsmanship globally.",
+    tag: "CULTURE",
+    img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1200",
+  },
+];
 
 export default function BlogPage() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  
+  // 1. TRACK SCROLL PROGRESS
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
+
+  // 2. MAP SCROLL TO VIBRANT EMERALD & LIME
+  // This creates a "growing" effect as you move down the page
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["#059669", "#84cc16"] 
+  );
+
   return (
-    <main className="relative min-h-screen bg-[#09140e] text-[#fdf2f8] selection:bg-[#ec4899] selection:text-white overflow-hidden">
+    <motion.main 
+      ref={targetRef}
+      style={{ backgroundColor }}
+      className="relative min-h-screen text-black selection:bg-black selection:text-white overflow-x-hidden"
+    >
       
-      {/* LAYER 0: Wildflower Drift Atmosphere (Seasonal Bloom) */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {/* Deep Meadow Base */}
-        <div className="absolute inset-0 bg-[#09140e]" />
-        
-        {/* Wild Rose Petal Glow (Top Left) */}
-        <div className="absolute -top-[10%] -left-[10%] w-[70%] h-[70%] bg-[#ec4899] opacity-15 blur-[140px] rounded-full" />
-        
-        {/* Poppy Red Bloom (Bottom Right) */}
-        <div className="absolute -bottom-[20%] -right-[10%] w-[80%] h-[80%] bg-[#f43f5e] opacity-10 blur-[160px] rounded-full" />
-        
-        {/* Violet Shadow (Center Right) */}
-        <div className="absolute top-[30%] -right-[5%] w-[50%] h-[60%] bg-[#a855f7] opacity-10 blur-[120px] rounded-full" />
-
-        {/* Summer Haze Grain */}
-        <div className="absolute inset-0 opacity-[0.04] mix-blend-screen" style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
-      </div>
-
-      <div className="relative z-10">
-        {/* PAGE INTRO: Forcing Rose and Blossom tones */}
-        <div className="[&_h1]:text-[#ec4899] [&_p]:text-[#fbcfe8]">
-          <PageIntro
-            title="Blog & Media"
-            lead="Long-form writing and analysis exploring environmental systems, research, and collective action."
-          />
-        </div>
-
-        <PinnedNarrative
-          height={300}
-          ambient="library" // Using library logic for structural consistency
-          visual={
-            <div className="group relative w-full h-full rounded-2xl bg-gradient-to-br from-[#1e0a11] to-[#09140e] border border-[#ec4899]/30 shadow-[0_0_60px_rgba(236,72,153,0.15)] flex items-center justify-center overflow-hidden">
-              {/* Drifting Pollen Particles */}
-              {[...Array(12)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  className="absolute w-1 h-1 bg-[#ec4899] rounded-full opacity-40"
-                  animate={{
-                    y: [-20, -100],
-                    x: [Math.random() * 100, Math.random() * 120],
-                    opacity: [0, 0.4, 0],
-                  }}
-                  transition={{
-                    duration: 5 + Math.random() * 5,
-                    repeat: Infinity,
-                    delay: Math.random() * 5,
-                  }}
-                  style={{ left: `${Math.random() * 100}%`, top: "100%" }}
-                />
-              ))}
-              
-              <span className="relative text-[#ec4899] text-[10px] font-black tracking-[0.5em] uppercase">
-                Living Analysis
-              </span>
-            </div>
-          }
-          narrative={(progress) => {
-            const s1 = useNarrativeMotion(progress, { range: [0.10, 0.28] });
-            const s2 = useNarrativeMotion(progress, { range: [0.28, 0.46] });
-            const s3 = useNarrativeMotion(progress, { range: [0.46, 0.66] });
-            const s4 = useNarrativeMotion(progress, { range: [0.66, 0.88] });
-
-            return (
-              <div className="[&_h2]:text-[#ec4899] [&_h2]:font-bold">
-                {/* Ambient SVG: Organic Petal Curves */}
-                <motion.svg
-                  aria-hidden
-                  className="pointer-events-none absolute -left-48 top-0 w-[700px] h-[700px] opacity-20"
-                  viewBox="0 0 600 600"
-                  fill="none"
-                  animate={{
-                    rotate: [0, 5, 0],
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{
-                    duration: 20,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                  }}
-                >
-                  <path 
-                    d="M300 100 C400 100 500 200 500 300 C500 400 400 500 300 500 C200 500 100 400 100 300 C100 200 200 100 300 100 Z" 
-                    fill="url(#petal-grad)" 
-                  />
-                  <defs>
-                    <radialGradient id="petal-grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 300) scale(200)">
-                      <stop offset="0%" stopColor="#ec4899" stopOpacity="0.4" />
-                      <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-                </motion.svg>
-
-                <motion.div style={s1} className="relative mb-32">
-                  <PageSection title="Featured Writing">
-                    <p className="text-[#fdf2f8] leading-relaxed">
-                      In-depth analysis connecting environmental data with social
-                      and policy contexts.
-                    </p>
-                    <p className="mt-4 text-[#ec4899] font-medium border-l-2 border-[#f43f5e] pl-4">
-                      Stories that translate complexity into human understanding.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s2} className="relative mb-32">
-                  <PageSection title="Research Commentary">
-                    <p className="text-[#fdf2f8] leading-relaxed">
-                      Interpretive perspectives on studies and emerging findings.
-                    </p>
-                    <p className="mt-4 text-[#fdf2f8]">
-                      Bridging the gap between peer-reviewed data and everyday action.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s3} className="relative mb-32">
-                  <PageSection title="Platform Updates">
-                    <p className="text-[#fdf2f8] leading-relaxed">
-                      Documenting the evolution of the Iceberg platform.
-                    </p>
-                    <p className="mt-4 text-[#fdf2f8]">
-                      Following the growth of our environmental intelligence tools.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s4} className="relative mb-32">
-                  <PageSection title="Media & Press">
-                    <p className="text-[#fdf2f8] leading-relaxed">
-                      Interviews, presentations, and external coverage.
-                    </p>
-                    <p className="mt-4 text-[#fdf2f8]">
-                      Conversations with the broader global community.
-                    </p>
-                  </PageSection>
-                </motion.div>
-              </div>
-            );
-          }}
+      {/* ATMOSPHERE: Dynamic Liquid Forest Green */}
+      <div className="fixed inset-0 z-0">
+        <BackgroundGradientAnimation 
+          containerClassName="h-full w-full"
+          firstColor="5, 150, 105"    // Emerald
+          secondColor="16, 185, 129"  // Medium Green
+          thirdColor="20, 184, 166"   // Teal
+          fourthColor="132, 204, 22"  // Lime
+          fifthColor="6, 78, 59"      // Deep Forest
         />
-
-        {/* Closing Moment */}
-        <section className="py-48 text-center bg-gradient-to-t from-[#4c0519]/20 to-transparent">
-          <p className="text-[#f43f5e] text-xs font-bold tracking-[0.5em] uppercase mb-6">
-            Seasonal Insight
-          </p>
-          <h2 className="text-[#fdf2f8] text-2xl font-light tracking-tight px-6 max-w-xl mx-auto">
-            Ideas bloom where evidence is shared.
-          </h2>
-        </section>
+        <div className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-overlay" 
+             style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
       </div>
-    </main>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-32">
+        <header className="mb-48">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8"
+          >
+            Editorial Journal
+          </motion.p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.75] mb-12 uppercase"
+          >
+            Latest <br /> <span className="opacity-40">Journal</span>
+          </motion.h1>
+          <p className="max-w-2xl text-2xl md:text-3xl font-medium leading-tight">
+            Documenting the intersection of technology, climate action, and cultural preservation.
+          </p>
+        </header>
+
+        <section className="relative">
+          {/* Editorial Vertical Spine */}
+          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-black/20" />
+
+          {posts.map((post) => (
+            <motion.div 
+              key={post.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="group pl-12 mb-64"
+            >
+              <div className="flex flex-col md:flex-row gap-16">
+                {/* Meta Column */}
+                <div className="md:w-1/3">
+                  <div className="flex items-center gap-2 text-sm font-mono text-black/40 mb-4">
+                    <span>{post.date}</span>
+                    <span className="w-1 h-1 rounded-full bg-black/20" />
+                    <span>{post.readTime}</span>
+                  </div>
+                  <p className="text-[12px] font-black tracking-[0.2em] uppercase text-black border-b-2 border-black inline-block pb-1">
+                    {post.tag}
+                  </p>
+                </div>
+
+                {/* Content Column */}
+                <div className="md:w-2/3">
+                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.8] uppercase group-hover:tracking-tight transition-all duration-700">
+                    {post.title}
+                  </h2>
+                  
+                  {/* Image with shadow depth */}
+                  <div className="aspect-[16/9] w-full overflow-hidden mb-12 rounded-sm bg-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.1)] transition-all group-hover:shadow-[10px_10px_0px_rgba(0,0,0,0.2)]">
+                     <img 
+                       src={post.img} 
+                       alt={post.title}
+                       className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000" 
+                     />
+                  </div>
+                  
+                  <p className="text-xl md:text-2xl font-medium leading-snug text-black/90 mb-12">
+                    {post.desc}
+                  </p>
+                  
+                  <button className="text-sm font-black tracking-[0.4em] uppercase py-4 px-8 border-2 border-black hover:bg-black hover:text-white transition-all">
+                    Read Article
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </section>
+
+        <footer className="mt-96 pb-32 text-center border-t-2 border-black pt-24">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-black uppercase">
+            Shared Wisdom
+          </h2>
+          <p className="mt-8 text-xl font-bold uppercase tracking-[0.5em]">Growth is the root of truth.</p>
+        </footer>
+      </div>
+    </motion.main>
   );
 }

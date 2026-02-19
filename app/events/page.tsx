@@ -1,134 +1,157 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { PageIntro } from "@/components/page/PageIntro";
-import { PageSection } from "@/components/page/PageSection";
-import { PinnedNarrative } from "@/components/pinned/PinnedNarrative";
-import { useNarrativeMotion } from "@/components/pinned/useNarrativeMotion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+
+const events = [
+  {
+    id: "01",
+    title: "Intelligence Summit 2026",
+    location: "Arctic Research Hub",
+    date: "MAR 12 - 14",
+    desc: "A summit focused on cryosphere data integrity and the role of blockchain in climate transparency.",
+    tag: "CONFERENCE",
+    img: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "02",
+    title: "Global Methane Monitoring",
+    location: "Geneva / Virtual",
+    date: "APR 05",
+    desc: "A collaborative workshop on real-time atmospheric shifts and methane tracking using the Iceberg Data Stack.",
+    tag: "WORKSHOP",
+    img: "https://images.unsplash.com/photo-1591115765373-5207764f72e7?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "03",
+    title: "Transparency Framework",
+    location: "New York City",
+    date: "MAY 22",
+    desc: "Launch of the 2026 Evidence-Based Intelligence Framework for carbon accounting standards.",
+    tag: "INITIATIVE",
+    img: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=1200",
+  },
+];
 
 export default function EventsPage() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  
+  // 1. TRACK SCROLL PROGRESS
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
+
+  // 2. MAP SCROLL TO VIBRANT BLUE & MAGENTA
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["#2563eb", "#db2777"] 
+  );
+
   return (
-    <main className="relative min-h-screen bg-[#120a02] text-[#fef3c7] selection:bg-[#ea580c] selection:text-white overflow-hidden">
+    <motion.main 
+      ref={targetRef}
+      style={{ backgroundColor }}
+      className="relative min-h-screen text-black selection:bg-black selection:text-white overflow-x-hidden"
+    >
       
-      {/* LAYER 0: Ember Clearing Atmosphere (Autumn Dusk) */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {/* Deep Umber Base */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,_#1c1105_0%,_#120a02_100%)]" />
-        
-        {/* Golden Hour Wash (Top Right) */}
-        <div className="absolute -top-[10%] -right-[10%] w-[70%] h-[70%] bg-[#f59e0b] opacity-20 blur-[140px] rounded-full" />
-        
-        {/* Burnt Orange Glow (Bottom Left) */}
-        <div className="absolute -bottom-[20%] -left-[10%] w-[80%] h-[80%] bg-[#9a3412] opacity-30 blur-[160px] rounded-full" />
-
-        {/* Dusk Atmosphere Grain */}
-        <div className="absolute inset-0 opacity-[0.05] mix-blend-color-dodge" style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
-      </div>
-
-      <div className="relative z-10">
-        {/* PAGE INTRO: Forcing Amber and Cream tones */}
-        <div className="[&_h1]:text-[#fbbf24] [&_p]:text-[#fde68a]">
-          <PageIntro
-            title="Events"
-            lead="Iceberg hosts and supports events that foster dialogue, collaboration, and shared understanding around environmental systems and action."
-          />
-        </div>
-
-        <PinnedNarrative
-          height={300}
-          ambient="events"
-          visual={
-            <div className="group relative w-full h-full rounded-2xl bg-gradient-to-br from-[#431407] to-[#1c1105] border border-[#f59e0b]/30 shadow-[0_0_60px_rgba(245,158,11,0.15)] flex items-center justify-center overflow-hidden">
-              {/* Heat Haze Pulse */}
-              <motion.div 
-                className="absolute inset-0 bg-[#fbbf24] opacity-[0.03]"
-                animate={{ scale: [1, 1.2, 1], opacity: [0.03, 0.08, 0.03] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-              />
-              
-              <span className="relative text-[#fbbf24] text-[10px] font-black tracking-[0.5em] uppercase">
-                Active Gathering
-              </span>
-            </div>
-          }
-          narrative={(progress) => {
-            const s1 = useNarrativeMotion(progress, { range: [0.15, 0.3] });
-            const s2 = useNarrativeMotion(progress, { range: [0.3, 0.45] });
-            const s3 = useNarrativeMotion(progress, { range: [0.45, 0.6] });
-            const s4 = useNarrativeMotion(progress, { range: [0.6, 0.75] });
-
-            return (
-              <div className="[&_h2]:text-[#f59e0b] [&_h2]:font-bold">
-                {/* Ambient SVG: Drifting "Sparks" / Leaves */}
-                <motion.svg
-                  aria-hidden
-                  className="pointer-events-none absolute -right-32 top-0 w-[600px] h-[600px] opacity-40 mix-blend-screen"
-                  viewBox="0 0 600 600"
-                  fill="none"
-                  animate={{
-                    y: [0, -30, 0],
-                    x: [0, 15, 0],
-                  }}
-                  transition={{
-                    duration: 20,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                  }}
-                >
-                  <circle cx="300" cy="300" r="180" fill="url(#amber-spark-grad)" />
-                  <defs>
-                    <radialGradient id="amber-spark-grad" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(300 300) rotate(90) scale(200)">
-                      <stop offset="0%" stopColor="#fbbf24" stopOpacity="0.4" />
-                      <stop offset="70%" stopColor="#ea580c" stopOpacity="0.1" />
-                      <stop offset="100%" stopColor="transparent" stopOpacity="0" />
-                    </radialGradient>
-                  </defs>
-                </motion.svg>
-
-                <motion.div style={s1} className="relative mb-32">
-                  <PageSection title="Upcoming Events">
-                    <p className="text-[#fef3c7] leading-relaxed">Upcoming events include talks, workshops, and community discussions.</p>
-                    <p className="mt-4 text-[#fbbf24] font-medium border-l-2 border-[#ea580c] pl-4 italic">
-                      Each event provides context, purpose, and participation details.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s2} className="relative mb-32">
-                  <PageSection title="Ongoing Initiatives">
-                    <p className="text-[#fef3c7] leading-relaxed">Some events span multiple sessions or long-running collaborations.</p>
-                    <p className="mt-4 text-[#fef3c7]">This allows deeper engagement beyond single moments.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s3} className="relative mb-32">
-                  <PageSection title="Past Events & Archives">
-                    <p className="text-[#fef3c7] leading-relaxed">Past events are archived with recordings and documentation.</p>
-                    <p className="mt-4 text-[#fef3c7]">Insights remain accessible beyond their original schedule.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s4} className="relative mb-32">
-                  <PageSection title="Participation & Access">
-                    <p className="text-[#fef3c7] leading-relaxed">Events are designed to be inclusive and accessible.</p>
-                    <p className="mt-4 text-[#fef3c7]">Recordings or summaries are provided when possible.</p>
-                  </PageSection>
-                </motion.div>
-              </div>
-            );
-          }}
+      {/* ATMOSPHERE: Dynamic Liquid Pigment */}
+      <div className="fixed inset-0 z-0">
+        <BackgroundGradientAnimation 
+          containerClassName="h-full w-full"
+          firstColor="37, 99, 235"    // Royal Blue
+          secondColor="139, 92, 246"   // Violet
+          thirdColor="219, 39, 119"   // Magenta
+          fourthColor="244, 63, 94"    // Rose
+          fifthColor="30, 58, 138"     // Navy
         />
-
-        {/* Closing Moment */}
-        <section className="py-48 text-center bg-gradient-to-t from-[#7c2d12]/20 to-transparent">
-          <p className="text-[#fbbf24] text-xs font-bold tracking-[0.5em] uppercase mb-6">
-            Shared Resonance
-          </p>
-          <h2 className="text-[#fffbeb] text-2xl font-light tracking-tight px-6 max-w-xl mx-auto">
-            Action is the spark of understanding.
-          </h2>
-        </section>
+        <div className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-overlay" 
+             style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
       </div>
-    </main>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-32">
+        <header className="mb-48">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8"
+          >
+            Institutional Calendar
+          </motion.p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.75] mb-12 uppercase"
+          >
+            Events <br /> <span className="opacity-40">Archive</span>
+          </motion.h1>
+          <p className="max-w-2xl text-2xl md:text-3xl font-medium leading-tight">
+            Coordinating global action through evidence-based gatherings and 
+            chronological transparency.
+          </p>
+        </header>
+
+        <section className="relative">
+          {/* Editorial Vertical Spine */}
+          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-black/20" />
+
+          {events.map((event) => (
+            <motion.div 
+              key={event.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="group pl-12 mb-64"
+            >
+              <div className="flex flex-col md:flex-row gap-16">
+                {/* Meta Column */}
+                <div className="md:w-1/3">
+                  <div className="flex flex-col gap-1 text-sm font-mono text-black/60 mb-4 uppercase">
+                    <span className="text-black font-bold">{event.date}</span>
+                    <span>{event.location}</span>
+                  </div>
+                  <p className="text-[12px] font-black tracking-[0.2em] uppercase text-black border-b-2 border-black inline-block pb-1">
+                    {event.tag}
+                  </p>
+                </div>
+
+                {/* Content Column */}
+                <div className="md:w-2/3">
+                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.8] uppercase">
+                    {event.title}
+                  </h2>
+                  
+                  <div className="aspect-[16/10] w-full overflow-hidden mb-12 rounded-sm bg-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.1)] transition-all group-hover:shadow-[10px_10px_0px_rgba(0,0,0,0.2)]">
+                     <img 
+                       src={event.img} 
+                       alt={event.title}
+                       className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[2s]" 
+                     />
+                  </div>
+                  
+                  <p className="text-xl md:text-2xl font-medium leading-snug text-black mb-12">
+                    {event.desc}
+                  </p>
+                  
+                  <button className="text-sm font-black tracking-[0.4em] uppercase py-4 px-8 border-2 border-black hover:bg-black hover:text-[#db2777] transition-all">
+                    Register Now
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </section>
+
+        <footer className="mt-96 pb-32 text-center border-t-2 border-black pt-24">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-black uppercase">
+            Shared Resonance
+          </h2>
+          <p className="mt-8 text-xl font-bold uppercase tracking-[0.5em]">Action is the spark of truth.</p>
+        </footer>
+      </div>
+    </motion.main>
   );
 }

@@ -1,118 +1,120 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { PageIntro } from "@/components/page/PageIntro";
-import { PageSection } from "@/components/page/PageSection";
-import { PinnedNarrative } from "@/components/pinned/PinnedNarrative";
-import { useNarrativeMotion } from "@/components/pinned/useNarrativeMotion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+
+const resources = [
+  { id: "01", title: "Carbon Credits Guide Book", tag: "HANDBOOK", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1200", desc: "Unlocking Revenue for a Cleaner Tomorrow: A guidebook for STUs / SPVs / ULBs / Bus Operators." },
+  { id: "02", title: "Types of Carbon Credits", tag: "MARKET ANALYSIS", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1200", desc: "Primary Markets to generate Carbon Credits from. Information Note on Reduced emissions and Removal of CO2." },
+  { id: "03", title: "Carbon Credit Framework", tag: "GOVERNANCE", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200", desc: "United Nations Framework Convention on Climate Change (UNFCCC). Global carbon accounting standards." },
+  { id: "04", title: "World Bank Report", tag: "POLICY", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200", desc: "A Guide to developing Domestic Carbon Crediting Mechanisms by the World Bank Group." },
+];
 
 export default function LibraryPage() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  
+  // 1. TRACK SCROLL PROGRESS
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
+
+  // 2. MAP SCROLL TO COLORS
+  // Page starts Orange (#ea580c) and ends in a Vibrant Yellow (#fbbf24)
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["#ea580c", "#fbbf24"]
+  );
+
   return (
-    /* FIX: Changed bg-[#12100e] to bg-transparent */
-    <main className="relative min-h-screen text-[#fefce8] selection:bg-[#3f6212] selection:text-white overflow-hidden bg-transparent">
+    <motion.main 
+      ref={targetRef}
+      style={{ backgroundColor }} // Dynamic background binding
+      className="relative min-h-screen text-black transition-colors duration-500 selection:bg-black selection:text-white"
+    >
       
-      {/* LAYER 0: Purely for texture/grain, no solid colors */}
-      <div className="pointer-events-none fixed inset-0 z-0">
-        <div 
-          className="absolute inset-0 opacity-[0.06] mix-blend-overlay" 
-          style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} 
+      {/* ATMOSPHERE: Liquid Pigment Layer */}
+      <div className="fixed inset-0 z-0">
+        <BackgroundGradientAnimation 
+          containerClassName="h-full w-full"
+          firstColor="234, 88, 12"   // Base Orange
+          secondColor="251, 146, 60" // Light Amber
+          thirdColor="154, 52, 18"   // Burnt Sienna
         />
+        <div className="absolute inset-0 opacity-[0.1] pointer-events-none mix-blend-overlay" 
+             style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
       </div>
 
-      <div className="relative z-10">
-        <div className="[&_h1]:text-[#84cc16] [&_p]:text-[#d9f99d]">
-          <PageIntro
-            title="Library"
-            lead="A curated collection of research, datasets, and resources supporting evidence-based environmental understanding."
-          />
-        </div>
-
-        <PinnedNarrative
-          height={300}
-          ambient="library"
-          visual={
-            /* Softened background to allow lamp glow to bleed through the card */
-            <div className="group relative w-full h-full rounded-2xl bg-white/[0.03] backdrop-blur-md border border-[#84cc16]/20 shadow-[0_0_50px_rgba(132,204,22,0.05)] flex items-center justify-center overflow-hidden">
-              <div className="absolute inset-0 flex justify-around opacity-10">
-                {[...Array(6)].map((_, i) => (
-                  <div key={i} className="w-px h-full bg-[#84cc16]" />
-                ))}
-              </div>
-              
-              <motion.div 
-                className="relative w-32 h-32 border-2 border-[#84cc16]/30 rounded-full"
-                animate={{ scale: [1, 1.05, 1], rotate: 360 }}
-                transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-              />
-              
-              <span className="absolute bottom-8 text-[#84cc16] text-[9px] font-black tracking-[0.5em] uppercase">
-                Resource Index
-              </span>
-            </div>
-          }
-          narrative={(progress) => {
-            const s1 = useNarrativeMotion(progress, { range: [0.15, 0.3] });
-            const s2 = useNarrativeMotion(progress, { range: [0.3, 0.45] });
-            const s3 = useNarrativeMotion(progress, { range: [0.45, 0.6] });
-            const s4 = useNarrativeMotion(progress, { range: [0.6, 0.75] });
-
-            return (
-              <div className="[&_h2]:text-[#84cc16] [&_h2]:font-bold">
-                <motion.svg
-                  aria-hidden
-                  className="pointer-events-none absolute -left-48 top-0 w-[600px] h-[600px] opacity-10"
-                  viewBox="0 0 600 600"
-                  fill="none"
-                >
-                  <circle cx="300" cy="300" r="100" stroke="#84cc16" strokeWidth="1" />
-                  <circle cx="300" cy="300" r="200" stroke="#84cc16" strokeWidth="1" strokeDasharray="10 20" />
-                  <circle cx="300" cy="300" r="280" stroke="#84cc16" strokeWidth="0.5" />
-                </motion.svg>
-
-                <motion.div style={s1} className="relative mb-32">
-                  <PageSection title="Research & Publications">
-                    <p className="text-[#fefce8] leading-relaxed">Peer-reviewed studies and analytical reports.</p>
-                    <p className="mt-4 text-[#84cc16] font-medium border-l-2 border-[#3f6212] pl-4 italic">
-                      Contextual information accompanies each resource for deep analysis.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s2} className="relative mb-32">
-                  <PageSection title="Environmental Datasets">
-                    <p className="text-[#fefce8] leading-relaxed">Datasets are organized by region and domain.</p>
-                    <p className="mt-4 text-[#fefce8]">Metadata ensures transparency and long-term storage integrity.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s3} className="relative mb-32">
-                  <PageSection title="Methodologies & Frameworks">
-                    <p className="text-[#fefce8] leading-relaxed">Documented analytical approaches.</p>
-                    <p className="mt-4 text-[#fefce8]">Supports reproducibility and cross-platform interpretation.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s4} className="relative mb-32">
-                  <PageSection title="External Resources">
-                    <p className="text-[#fefce8] leading-relaxed">Connections to trusted institutions.</p>
-                    <p className="mt-4 text-[#fefce8]">Complementary materials are preserved within this digital grove.</p>
-                  </PageSection>
-                </motion.div>
-              </div>
-            );
-          }}
-        />
-
-        {/* Closing Moment with a subtle glow instead of a solid gradient */}
-        <section className="py-48 text-center bg-gradient-to-t from-[#84cc16]/5 to-transparent">
-          <p className="text-[#84cc16] text-[10px] font-black tracking-[0.6em] uppercase mb-6">
-            Permanent Record
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-32">
+        <header className="mb-48">
+          <motion.p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
+            Institutional Resource
+          </motion.p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.75] mb-12 uppercase"
+          >
+            Library <br /> <span className="opacity-40">Archive</span>
+          </motion.h1>
+          <p className="max-w-2xl text-2xl md:text-3xl font-medium leading-tight">
+            A curated collection of research and datasets supporting 
+            evidence-based environmental understanding.
           </p>
-          <h2 className="text-[#fefce8] text-2xl font-light tracking-tight px-6 max-w-xl mx-auto">
-            Knowledge grows where truth is stored.
-          </h2>
+        </header>
+
+        <section className="relative">
+          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-black/20" />
+
+          {resources.map((item) => (
+            <motion.div 
+              key={item.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="group pl-12 mb-64"
+            >
+              <div className="flex flex-col md:flex-row gap-16">
+                <div className="md:w-1/3">
+                  <span className="text-lg font-mono text-black/40 mb-4 block">
+                    INDEX {item.id}
+                  </span>
+                  <p className="text-[12px] font-black tracking-[0.2em] uppercase text-black border-b-2 border-black inline-block pb-1">
+                    {item.tag}
+                  </p>
+                </div>
+
+                <div className="md:w-2/3">
+                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.8] uppercase">
+                    {item.title}
+                  </h2>
+                  <div className="aspect-[16/10] w-full overflow-hidden mb-12 rounded-sm bg-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.1)]">
+                     <img 
+                       src={item.img} 
+                       alt={item.title}
+                       className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[1s]" 
+                     />
+                  </div>
+                  <p className="text-xl md:text-2xl font-medium leading-snug">
+                    {item.desc}
+                  </p>
+                  <button className="text-sm font-black tracking-[0.4em] uppercase py-4 px-8 border-2 border-black hover:bg-black hover:text-white transition-all">
+                    Access Record
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </section>
+
+        <footer className="mt-96 pb-32 text-center border-t-2 border-black pt-24">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-black uppercase">
+            Permanent Record
+          </h2>
+        </footer>
       </div>
-    </main>
+    </motion.main>
   );
 }

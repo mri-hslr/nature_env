@@ -1,160 +1,148 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { PageIntro } from "@/components/page/PageIntro";
-import { PageSection } from "@/components/page/PageSection";
-import { PinnedNarrative } from "@/components/pinned/PinnedNarrative";
-import { useNarrativeMotion } from "@/components/pinned/useNarrativeMotion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
-export default function UserGuidePage() {
+const guideSteps = [
+  {
+    id: "01",
+    title: "Understanding Baseline",
+    tag: "ORIENTATION",
+    desc: "Establishing a verifiable environmental baseline is the first step toward permanent stability. Learn how to audit existing ecosystem data.",
+    img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "02",
+    title: "Carbon Verification",
+    tag: "METHODOLOGY",
+    desc: "A deep dive into the 2026 Transparency Framework for carbon crediting. Verifying credits through decentralized nodes.",
+    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "03",
+    title: "Ecosystem Integration",
+    tag: "IMPLEMENTATION",
+    desc: "Mapping your environmental intelligence to global monitoring systems for real-time reporting and impact analysis.",
+    img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1200",
+  },
+];
+
+export default function GuidePage() {
+  const targetRef = useRef<HTMLDivElement>(null);
+  
+  // 1. TRACK SCROLL PROGRESS
+  const { scrollYProgress } = useScroll({
+    target: targetRef,
+    offset: ["start start", "end end"],
+  });
+
+  // 2. MAP SCROLL: AMBER (#f59e0b) TO CRIMSON (#991b1b)
+  const backgroundColor = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["#f59e0b", "#991b1b"] 
+  );
+
   return (
-    <main className="relative min-h-screen bg-[#f5f7f2] text-[#2d3731] selection:bg-[#d1d9cf] selection:text-[#2d3731] overflow-hidden">
+    <motion.main 
+      ref={targetRef}
+      style={{ backgroundColor }}
+      className="relative min-h-screen text-black selection:bg-black selection:text-white overflow-x-hidden"
+    >
       
-      {/* LAYER 0: Morning Mist Atmosphere (High-Visibility Organic) */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {/* Soft Lichen Base */}
-        <div className="absolute inset-0 bg-[#f5f7f2]" />
-        
-        {/* Soft Light Wash (Top Center) */}
-        <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[90%] h-[70%] bg-white opacity-60 blur-[120px] rounded-full" />
-        
-        {/* Architectural Grid Layer */}
-        <div className="absolute inset-0 opacity-[0.1]" 
-             style={{ 
-               backgroundImage: `linear-gradient(#6b8c77 0.5px, transparent 0.5px), linear-gradient(90deg, #6b8c77 0.5px, transparent 0.5px)`, 
-               backgroundSize: '50px 50px' 
-             }} />
-        
-        {/* Soft Stone Pool (Bottom Right) */}
-        <div className="absolute -bottom-[10%] -right-[10%] w-[60%] h-[60%] bg-[#d1d9cf] opacity-40 blur-[140px] rounded-full" />
-
-        {/* Paper Grain Texture */}
-        <div className="absolute inset-0 opacity-[0.04] mix-blend-multiply" style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
-      </div>
-
-      <div className="relative z-10">
-        {/* PAGE INTRO: Forcing Lichen and Deep Charcoal tones */}
-        <div className="[&_h1]:text-[#4a5d51] [&_p]:text-[#607266]">
-          <PageIntro
-            title="User Guide"
-            lead="This guide introduces the core concepts, workflows, and tools that make up the Iceberg platform."
-          />
-        </div>
-
-        <PinnedNarrative
-          height={300}
-          ambient="guide"
-          visual={
-            <div className="group relative w-full h-full rounded-2xl bg-white/80 backdrop-blur-sm border border-[#6b8c77]/20 shadow-[0_15px_40px_rgba(107,140,119,0.05)] flex items-center justify-center overflow-hidden">
-              {/* Internal 4-Quadrant Fine-Line Grid */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-[0.5px] h-full bg-[#6b8c77]/20 absolute" />
-                <div className="h-[0.5px] w-full bg-[#6b8c77]/20 absolute" />
-                
-                {/* Concentric Measurement Circles */}
-                <div className="w-32 h-32 border border-[#6b8c77]/10 rounded-full absolute" />
-                <div className="w-64 h-64 border border-[#6b8c77]/5 rounded-full absolute" />
-              </div>
-              
-              {/* Soft Pulsing Compass */}
-              <motion.div 
-                className="relative w-40 h-40 border border-[#6b8c77]/30 rounded-full flex items-center justify-center"
-                animate={{ scale: [1, 1.05, 1] }}
-                transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-              >
-                {/* Markers */}
-                <div className="absolute top-0 w-[1px] h-4 bg-[#6b8c77]" />
-                <div className="absolute bottom-0 w-[1px] h-4 bg-[#6b8c77]/40" />
-                <div className="absolute left-0 h-[1px] w-4 bg-[#6b8c77]/40" />
-                <div className="absolute right-0 h-[1px] w-4 bg-[#6b8c77]/40" />
-                
-                {/* Needle */}
-                <motion.div 
-                  className="absolute w-[1px] h-20 bg-gradient-to-t from-transparent via-[#6b8c77] to-transparent origin-center"
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                />
-              </motion.div>
-              
-              <span className="absolute bottom-8 text-[#6b8c77] text-[9px] font-bold tracking-[0.6em] uppercase">
-                Methodology Map
-              </span>
-            </div>
-          }
-          narrative={(progress) => {
-            const s1 = useNarrativeMotion(progress, { range: [0.15, 0.3] });
-            const s2 = useNarrativeMotion(progress, { range: [0.3, 0.45] });
-            const s3 = useNarrativeMotion(progress, { range: [0.45, 0.6] });
-            const s4 = useNarrativeMotion(progress, { range: [0.6, 0.75] });
-            const s5 = useNarrativeMotion(progress, { range: [0.75, 0.9] });
-
-            return (
-              <div className="[&_h2]:text-[#4a5d51] [&_h2]:font-bold [&_h2]:tracking-tight">
-                {/* Ambient SVG: 4-Quadrant Structural Trace */}
-                <motion.svg
-                  aria-hidden
-                  className="pointer-events-none absolute -left-32 top-0 w-[500px] h-[500px] opacity-10"
-                  viewBox="0 0 500 500"
-                  fill="none"
-                >
-                  <circle cx="250" cy="250" r="220" stroke="#6b8c77" strokeWidth="0.5" />
-                  <line x1="250" y1="0" x2="250" y2="500" stroke="#6b8c77" strokeWidth="0.5" />
-                  <line x1="0" y1="250" x2="500" y2="250" stroke="#6b8c77" strokeWidth="0.5" />
-                </motion.svg>
-
-                <motion.div style={s1} className="relative mb-32">
-                  <PageSection title="Getting Started">
-                    <p className="text-[#4a5d51] leading-relaxed">Iceberg can be explored without creating an account.</p>
-                    <p className="mt-4 text-[#6b8c77] font-medium border-l border-[#6b8c77] pl-4">
-                      Every tool is designed for immediate accessibility.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s2} className="relative mb-32">
-                  <PageSection title="Understanding the Platform">
-                    <p className="text-[#4a5d51] leading-relaxed">Iceberg is organized around environmental systems.</p>
-                    <p className="mt-4 text-[#4a5d51]">Data and analysis are unified within a single coordinate system.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s3} className="relative mb-32">
-                  <PageSection title="Working with Data">
-                    <p className="text-[#4a5d51] leading-relaxed">Datasets include metadata, geographic scope, and methodology.</p>
-                    <p className="mt-4 text-[#607266] italic">Transparency ensures that evidence remains verifiable.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s4} className="relative mb-32">
-                  <PageSection title="From Insight to Action">
-                    <p className="text-[#4a5d51] leading-relaxed">Insights can inform policy and community initiatives.</p>
-                    <p className="mt-4 text-[#4a5d51]">Structural clarity leads to more effective environmental stewardship.</p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s5} className="relative mb-32">
-                  <PageSection title="Next Steps">
-                    <p className="text-[#4a5d51] leading-relaxed">Explore advanced features and long-term tracking tools.</p>
-                    <p className="mt-4 text-[#6b8c77] tracking-[0.2em] text-[10px] font-bold uppercase">
-                      Pathway Clear.
-                    </p>
-                  </PageSection>
-                </motion.div>
-              </div>
-            );
-          }}
+      {/* ATMOSPHERE: Dynamic Liquid Pigment Layer */}
+      <div className="fixed inset-0 z-0">
+        <BackgroundGradientAnimation 
+          containerClassName="h-full w-full"
+          firstColor="245, 158, 11"    // Base Amber
+          secondColor="251, 191, 36"   // Light Amber
+          thirdColor="220, 38, 38"     // Red
+          fourthColor="185, 28, 28"    // Crimson
+          fifthColor="69, 10, 10"      // Deep Blood
         />
-
-        {/* Closing Moment */}
-        <section className="py-48 text-center border-t border-[#d1d9cf] bg-white/40">
-          <p className="text-[#6b8c77] text-[10px] font-black tracking-[0.5em] uppercase mb-6">
-            Guidance Finalized
-          </p>
-          <h2 className="text-[#2d3731] text-2xl font-light tracking-tight px-6 max-w-xl mx-auto">
-            Simplicity is the final layer of complexity.
-          </h2>
-        </section>
+        <div className="absolute inset-0 opacity-[0.2] pointer-events-none mix-blend-overlay" 
+             style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
       </div>
-    </main>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-32">
+        <header className="mb-48">
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8"
+          >
+            Tactical Manual
+          </motion.p>
+          <motion.h1 
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2 }}
+            className="text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.75] mb-12 uppercase"
+          >
+            The <br /> <span className="opacity-40">Guide</span>
+          </motion.h1>
+          <p className="max-w-2xl text-2xl md:text-3xl font-medium leading-tight">
+            A comprehensive protocol for implementing environmental 
+            intelligence within your local ecosystem.
+          </p>
+        </header>
+
+        <section className="relative">
+          {/* Editorial Vertical Spine */}
+          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-black/20" />
+
+          {guideSteps.map((step) => (
+            <motion.div 
+              key={step.id}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              className="group pl-12 mb-64"
+            >
+              <div className="flex flex-col md:flex-row gap-16">
+                <div className="md:w-1/3">
+                  <span className="text-lg font-mono text-black/40 mb-4 block">
+                    STEP {step.id}
+                  </span>
+                  <p className="text-[12px] font-black tracking-[0.2em] uppercase text-black border-b-2 border-black inline-block pb-1">
+                    {step.tag}
+                  </p>
+                </div>
+
+                <div className="md:w-2/3 text-black">
+                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.8] uppercase group-hover:text-white transition-colors duration-500">
+                    {step.title}
+                  </h2>
+                  
+                  <div className="aspect-[16/10] w-full overflow-hidden mb-12 rounded-sm bg-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.1)] transition-all">
+                     <img 
+                       src={step.img} 
+                       alt={step.title}
+                       className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[2s]" 
+                     />
+                  </div>
+                  
+                  <p className="text-xl md:text-2xl font-medium leading-snug mb-12">
+                    {step.desc}
+                  </p>
+                  
+                  <button className="text-sm font-black tracking-[0.4em] uppercase py-4 px-8 border-2 border-black hover:bg-black hover:text-[#f59e0b] transition-all">
+                    Learn Step {step.id}
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </section>
+
+        <footer className="mt-96 pb-32 text-center border-t-2 border-black pt-24">
+          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-black uppercase">
+            Permanent Path
+          </h2>
+          <p className="mt-8 text-xl font-bold uppercase tracking-[0.5em]">Stability is found in the depth of truth.</p>
+        </footer>
+      </div>
+    </motion.main>
   );
 }

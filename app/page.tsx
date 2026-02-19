@@ -8,7 +8,7 @@ import { Hero } from "@/components/sections/Hero";
 import { EditorialHeadlines } from "@/components/sections/EditorialHeadlines";
 import { ImageScrollNarrative } from "@/components/sections/ImageScrollNarrative"; // NEW IMPORT
 import { Emphasis } from "@/components/sections/Emphasis";
-import { HorizontalScroll } from "@/components/sections/HorizontalScroll";
+import { HomeScrollSequence } from "@/components/sections/HomeScrollSequence";
 import { ReflectiveOutro } from "@/components/sections/ReflectiveOutro";
 
 export default function HomePage() {
@@ -56,7 +56,7 @@ export default function HomePage() {
 
       {/* 4. REMAINING SECTIONS */}
       <section className="relative z-20"><Emphasis /></section>
-      <section className="relative z-10"><HorizontalScroll /></section>
+      <section className="relative z-10"><HomeScrollSequence /></section>
       <section className="relative z-0"><ReflectiveOutro /></section>
     </motion.div>
   );

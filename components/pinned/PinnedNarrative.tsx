@@ -1,88 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ReactNode, useMemo } from "react";
-import { useScroll } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useTransform, useScroll } from "framer-motion";
 
 interface PinnedNarrativeProps {
-  height: number;
-  visual: ReactNode;
-  narrative: (progress: any) => ReactNode;
-  ambient?: "community" | "events" | "guide" | "library";
+  height?: number;
+  // This union must match your library/page.tsx usage exactly.
+  ambient?: "community" | "events" | "guide" | "library" | "none"; 
+  visual: React.ReactNode;
+  narrative: (progress: any) => React.ReactNode;
 }
 
-export function PinnedNarrative({
-  height,
-  visual,
-  narrative,
-  ambient,
-}: PinnedNarrativeProps) {
-  const { scrollYProgress } = useScroll();
+export const PinnedNarrative: React.FC<PinnedNarrativeProps> = ({ 
+  height = 300, 
+  ambient = "none", 
+  visual, 
+  narrative 
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const ambientGradient = useMemo(() => {
-    switch (ambient) {
-      case "community":
-        return "radial-gradient(60% 50% at 50% 40%, rgba(80, 200, 160, 0.18), transparent 70%)";
-      case "events":
-        return "radial-gradient(60% 50% at 50% 40%, rgba(120, 160, 255, 0.18), transparent 70%)";
-      case "guide":
-        return "radial-gradient(60% 50% at 50% 40%, rgba(240, 210, 140, 0.18), transparent 70%)";
-      case "library":
-        return "radial-gradient(60% 50% at 50% 40%, rgba(180, 140, 255, 0.18), transparent 70%)";
-      default:
-        return null;
-    }
-  }, [ambient]);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"],
+  });
+
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]);
 
   return (
-    <section
-      className="relative w-full"
+    <div 
+      ref={containerRef} 
+      className="relative w-full" 
       style={{ height: `${height}vh` }}
     >
-      {/* Ambient background (pin-safe) */}
-      {ambientGradient && (
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 z-0"
-          style={{ background: ambientGradient }}
-          animate={{
-            opacity: [0.4, 0.65, 0.4],
-            scale: [1, 1.05, 1],
-          }}
-          transition={{
-            duration: 18,
-            ease: "easeInOut",
-            repeat: Infinity,
-          }}
-        />
-      )}
-
-      {/* Sticky Wrapper 
-          Changed from Grid to Flex to allow the Narrative to dictate the vertical flow 
-          while the visual remains pinned and less intrusive.
-      */}
-      <div className="sticky top-0 h-screen w-full flex flex-col lg:flex-row items-center justify-between z-10 px-6 lg:px-24 overflow-hidden">
-        
-        {/* Narrative (Left/Center Column) */}
-        <div className="relative z-20 w-full lg:w-[55%] h-full flex flex-col justify-center">
-          {/* This container ensures the narrative has its own vertical space 
-              without being compressed by the visual asset.
-          */}
-          <div className="w-full max-w-2xl">
-            {narrative(scrollYProgress)}
+      <div className="sticky top-0 h-screen w-full overflow-hidden">
+        <motion.div 
+          style={{ opacity: contentOpacity }}
+          className="flex h-full w-full items-center px-6 md:px-20"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center w-full max-w-7xl mx-auto">
+            <div className="relative">
+              {narrative(scrollYProgress)}
+            </div>
+            <div className="relative aspect-square w-full">
+              <div className="relative h-full w-full overflow-hidden rounded-3xl border border-white/5 bg-zinc-900/50">
+                {visual}
+              </div>
+            </div>
           </div>
-        </div>
-
-        {/* Visual (Right Side - Pinned) */}
-        <div className="relative z-10 w-full lg:w-[35%] h-full flex items-center justify-center lg:justify-end">
-          {/* Reduced visual weight from 50% to 35%.
-              Added explicit constraints to prevent overlap with the narrative column.
-          */}
-          <div className="w-full max-w-md aspect-square lg:aspect-auto lg:h-[70vh] flex items-center">
-            {visual}
-          </div>
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
-}
+};
