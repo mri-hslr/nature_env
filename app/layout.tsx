@@ -4,6 +4,7 @@ import { Header } from "@/components/navigations/Header";
 import PageTransition from "@/components/transitions/PageTransition";
 import { IntroProvider } from "@/app/context/IntroContext";
 import { MontageIntro } from "@/components/motion/MontageIntro";
+import { AmbientLamp } from "@/components/ui/AmbientLamp"; // Import here
 
 export default function RootLayout({
   children,
@@ -14,14 +15,15 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased bg-black text-white">
         <IntroProvider>
+        <AmbientLamp />
           {/* The MontageIntro will live here, sitting above the content */}
           <MontageIntro />
           
           <Header />
           <PageTransition>
-            <main className="relative">
+            <main className="relative bg-transparent">
               {children}
-            </main>
+            </main >
           </PageTransition>
         </IntroProvider>
       </body>

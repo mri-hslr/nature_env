@@ -5,7 +5,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const NARRATIVE_DATA = [
-  { id: 1, title: "CYAN HORIZON", sub: "Pacific Ocean", src: "https://images.unsplash.com/photo-1505118380757-91f5f45d8de8?auto=format&fit=crop&q=80&w=2000" },
+  { id: 1, title: "CYAN HORIZON", sub: "Pacific Ocean", src: "https://unsplash.com/photos/a-school-of-fish-in-sipadan-island-in-malaysia-Qexatet5XGM" },
   { id: 2, title: "VERDANT VEINS", sub: "Amazon Basin", src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=2000" },
   { id: 3, title: "WHITE SILENCE", sub: "Arctic Shelf", src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=2000" },
   { id: 4, title: "GOLDEN RANGE", sub: "Rocky Mountains", src: "https://images.unsplash.com/photo-1500627760312-ad3016a401c1?auto=format&fit=crop&q=80&w=2000" },

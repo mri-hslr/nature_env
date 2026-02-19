@@ -8,28 +8,18 @@ import { useNarrativeMotion } from "@/components/pinned/useNarrativeMotion";
 
 export default function LibraryPage() {
   return (
-    <main className="relative min-h-screen bg-[#12100e] text-[#fefce8] selection:bg-[#3f6212] selection:text-white overflow-hidden">
+    /* FIX: Changed bg-[#12100e] to bg-transparent */
+    <main className="relative min-h-screen text-[#fefce8] selection:bg-[#3f6212] selection:text-white overflow-hidden bg-transparent">
       
-      {/* LAYER 0: Shadowed Grove Atmosphere (Deep Archive) */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {/* Deep Umber Base */}
-        <div className="absolute inset-0 bg-[#12100e]" />
-        
-        {/* Archive Light Shaft (Top Right) */}
-        <div className="absolute top-0 right-[15%] w-[1px] h-[100%] bg-gradient-to-b from-[#84cc16] to-transparent opacity-30" />
-        
-        {/* Mossy Depth Wash (Bottom Left) */}
-        <div className="absolute -bottom-[10%] -left-[5%] w-[70%] h-[70%] bg-[#3f6212] opacity-20 blur-[120px] rounded-full" />
-        
-        {/* Cedar Root Shadows (Right) */}
-        <div className="absolute top-[20%] -right-[10%] w-[50%] h-[80%] bg-[#451a03] opacity-20 blur-[100px] rounded-full" />
-
-        {/* Archive Dust Grain */}
-        <div className="absolute inset-0 opacity-[0.06] mix-blend-overlay" style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
+      {/* LAYER 0: Purely for texture/grain, no solid colors */}
+      <div className="pointer-events-none fixed inset-0 z-0">
+        <div 
+          className="absolute inset-0 opacity-[0.06] mix-blend-overlay" 
+          style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} 
+        />
       </div>
 
       <div className="relative z-10">
-        {/* PAGE INTRO: Forcing Lime and Parchment tones */}
         <div className="[&_h1]:text-[#84cc16] [&_p]:text-[#d9f99d]">
           <PageIntro
             title="Library"
@@ -41,15 +31,14 @@ export default function LibraryPage() {
           height={300}
           ambient="library"
           visual={
-            <div className="group relative w-full h-full rounded-2xl bg-gradient-to-br from-[#1c1917] to-[#12100e] border border-[#84cc16]/20 shadow-[0_0_50px_rgba(132,204,22,0.05)] flex items-center justify-center overflow-hidden">
-              {/* Vertical "Shelving" Structure */}
+            /* Softened background to allow lamp glow to bleed through the card */
+            <div className="group relative w-full h-full rounded-2xl bg-white/[0.03] backdrop-blur-md border border-[#84cc16]/20 shadow-[0_0_50px_rgba(132,204,22,0.05)] flex items-center justify-center overflow-hidden">
               <div className="absolute inset-0 flex justify-around opacity-10">
                 {[...Array(6)].map((_, i) => (
                   <div key={i} className="w-px h-full bg-[#84cc16]" />
                 ))}
               </div>
               
-              {/* Central Growth Ring */}
               <motion.div 
                 className="relative w-32 h-32 border-2 border-[#84cc16]/30 rounded-full"
                 animate={{ scale: [1, 1.05, 1], rotate: 360 }}
@@ -69,7 +58,6 @@ export default function LibraryPage() {
 
             return (
               <div className="[&_h2]:text-[#84cc16] [&_h2]:font-bold">
-                {/* Ambient SVG: Growth Rings / Records */}
                 <motion.svg
                   aria-hidden
                   className="pointer-events-none absolute -left-48 top-0 w-[600px] h-[600px] opacity-10"
@@ -115,8 +103,8 @@ export default function LibraryPage() {
           }}
         />
 
-        {/* Closing Moment */}
-        <section className="py-48 text-center bg-gradient-to-t from-[#1c1917] to-transparent">
+        {/* Closing Moment with a subtle glow instead of a solid gradient */}
+        <section className="py-48 text-center bg-gradient-to-t from-[#84cc16]/5 to-transparent">
           <p className="text-[#84cc16] text-[10px] font-black tracking-[0.6em] uppercase mb-6">
             Permanent Record
           </p>
