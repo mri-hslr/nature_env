@@ -1,4 +1,4 @@
-// app/page.tsx (Updated)
+// app/page.tsx
 "use client";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -6,7 +6,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 import { Hero } from "@/components/sections/Hero";
 import { EditorialHeadlines } from "@/components/sections/EditorialHeadlines";
-import { ImageScrollNarrative } from "@/components/sections/ImageScrollNarrative"; // NEW IMPORT
+import { ImageScrollNarrative } from "@/components/sections/ImageScrollNarrative";
 import { Emphasis } from "@/components/sections/Emphasis";
 import { HomeScrollSequence } from "@/components/sections/HomeScrollSequence";
 import { ReflectiveOutro } from "@/components/sections/ReflectiveOutro";
@@ -15,7 +15,9 @@ export default function HomePage() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
 
-  useEffect(() => { setIsMounted(true); }, []);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -23,8 +25,8 @@ export default function HomePage() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 120,
+    damping: 40,
     restDelta: 0.001,
   });
 
@@ -35,12 +37,15 @@ export default function HomePage() {
   );
 
   return (
-    <motion.div ref={containerRef} style={{ backgroundColor }} className="relative w-full">
-      
+    <motion.div
+      ref={containerRef}
+      style={{ backgroundColor }}
+      className="relative w-full"
+    >
       {/* 1. HERO */}
-      <section className="relative h-[110vh] w-full z-[70]">
+      <section className="relative h-[140vh] w-full z-[70]">
         <div className="sticky top-0 h-screen w-full overflow-hidden">
-          {isMounted && <Hero scrollProgress={smoothProgress} />}
+          {isMounted && <Hero />}
         </div>
       </section>
 
@@ -49,15 +54,23 @@ export default function HomePage() {
         {isMounted && <EditorialHeadlines progress={smoothProgress} />}
       </section>
 
-      {/* 3. NEW: IMAGE SCROLL NARRATIVE (Renault Originals Style) */}
+      {/* 3. IMAGE SCROLL NARRATIVE */}
       <section className="relative z-[50]">
         {isMounted && <ImageScrollNarrative />}
       </section>
 
       {/* 4. REMAINING SECTIONS */}
-      <section className="relative z-20"><Emphasis /></section>
-      <section className="relative z-10"><HomeScrollSequence /></section>
-      <section className="relative z-0"><ReflectiveOutro /></section>
+      <section className="relative z-20">
+        <Emphasis />
+      </section>
+
+      <section className="relative z-10">
+        <HomeScrollSequence />
+      </section>
+
+      <section className="relative z-0">
+        <ReflectiveOutro />
+      </section>
     </motion.div>
   );
 }

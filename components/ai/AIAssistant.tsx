@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-// Adaptive color mapping
+// Adaptive color mapping based on site routes
 const getThemeColor = (path: string) => {
   if (path.includes("/library")) return "#ea580c"; // Orange
   if (path.includes("/blog")) return "#059669";    // Green
@@ -25,6 +25,7 @@ export const AIAssistant = () => {
   const themeColor = getThemeColor(pathname);
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  // Auto-scroll to latest message for better UX
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -39,6 +40,7 @@ export const AIAssistant = () => {
     setMessages(prev => [...prev, userMsg]);
     setInput("");
 
+    // Mock AI response for UI feedback
     setTimeout(() => {
       setMessages(prev => [...prev, {
         id: Date.now() + 1,
@@ -52,7 +54,7 @@ export const AIAssistant = () => {
     <div className="fixed bottom-8 right-8 z-[100]">
       <AnimatePresence>
         
-        {/* THE AI ICON */}
+        {/* THE AI ICON: Neural Brain */}
         {!isOpen && (
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
@@ -81,28 +83,28 @@ export const AIAssistant = () => {
           </motion.button>
         )}
 
-        {/* CINEMATIC DRAWER PANEL - UPDATED HEIGHT */}
+        {/* CINEMATIC DRAWER PANEL: Re-proportioned */}
         {isOpen && (
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 50, opacity: 0 }}
-            // REDUCED HEIGHT: Changed from 650px to 480px
-            className="w-[420px] h-[480px] bg-black/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] overflow-hidden flex flex-col shadow-2xl pointer-events-auto"
+            // WIDTH REDUCED to 340px | HEIGHT INCREASED to 580px
+            className="w-[340px] h-[580px] bg-black/95 backdrop-blur-3xl border border-white/10 rounded-[2rem] overflow-hidden flex flex-col shadow-2xl pointer-events-auto"
           >
             {/* Header */}
-            <div className="p-8 border-b border-white/5 flex items-center justify-between">
+            <div className="p-6 border-b border-white/5 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: themeColor }} />
-                <span className="text-[10px] font-black tracking-[0.5em] uppercase text-white/50">System Intel</span>
+                <span className="text-[9px] font-black tracking-[0.4em] uppercase text-white/50">System Intelligence</span>
               </div>
-              <button onClick={() => setIsOpen(false)} className="text-[10px] font-black tracking-widest uppercase text-white/30 hover:text-white transition-colors">
+              <button onClick={() => setIsOpen(false)} className="text-[9px] font-black tracking-widest uppercase text-white/30 hover:text-white transition-colors">
                 Close
               </button>
             </div>
 
             {/* Conversation Feed */}
-            <div ref={scrollRef} className="flex-1 overflow-y-auto p-8 space-y-6 scrollbar-hide">
+            <div ref={scrollRef} className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide">
               {messages.map((msg) => (
                 <motion.div
                   key={msg.id}
@@ -110,7 +112,7 @@ export const AIAssistant = () => {
                   animate={{ opacity: 1, y: 0 }}
                   className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div className={`max-w-[85%] px-5 py-3.5 rounded-3xl text-[13px] leading-relaxed ${
+                  <div className={`max-w-[90%] px-4 py-3 rounded-2xl text-[12px] leading-relaxed ${
                     msg.role === "user" 
                     ? "bg-white/10 text-white" 
                     : "bg-transparent border border-white/5 text-white/70 italic"
@@ -121,8 +123,8 @@ export const AIAssistant = () => {
               ))}
             </div>
 
-            {/* Input Area */}
-            <form onSubmit={handleSend} className="p-8 pt-0">
+            {/* Input Area: Minimalized for narrower width */}
+            <form onSubmit={handleSend} className="p-6 pt-0">
               <div className="relative">
                 <input
                   type="text"
@@ -130,8 +132,8 @@ export const AIAssistant = () => {
                   onFocus={() => setIsFocused(true)}
                   onBlur={() => setIsFocused(false)}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Inquire here..."
-                  className="w-full bg-white/5 border-none rounded-2xl px-6 py-4 text-sm text-white placeholder:text-white/20 focus:ring-0 outline-none"
+                  placeholder="Inquire..."
+                  className="w-full bg-white/5 border-none rounded-xl px-5 py-3.5 text-xs text-white placeholder:text-white/20 focus:ring-0 outline-none"
                 />
                 <motion.div 
                   initial={{ width: "0%" }}
@@ -139,7 +141,7 @@ export const AIAssistant = () => {
                   className="absolute bottom-0 left-0 h-[1px] z-10"
                   style={{ backgroundColor: themeColor }}
                 />
-                <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] font-black tracking-widest uppercase text-white/40 hover:text-white transition-colors">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-[9px] font-black tracking-widest uppercase text-white/40 hover:text-white transition-colors">
                   Send
                 </button>
               </div>
