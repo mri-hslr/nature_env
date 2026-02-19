@@ -1,150 +1,57 @@
 "use client";
 
+import React from "react";
 import { motion } from "framer-motion";
-import { PageIntro } from "@/components/page/PageIntro";
-import { PageSection } from "@/components/page/PageSection";
-import { PinnedNarrative } from "@/components/pinned/PinnedNarrative";
-import { useNarrativeMotion } from "@/components/pinned/useNarrativeMotion";
+import { NetworkBackground } from "@/components/ui/network-background";
+import { EvervaultCard } from "@/components/ui/evervault-card";
+
+// UPDATED: Reliable High-Resolution Image Placeholders
+const tiles = [
+  { id: 1, text: "Glacial Mass", color: "#7dd3fc", img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1200" },
+  { id: 2, text: "Arctic Current", color: "#0ea5e9", img: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&q=80&w=1200" },
+  { id: 3, text: "Deep Ice", color: "#0c4a6e", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1200" },
+  { id: 4, text: "Thermal Flux", color: "#f43f5e", img: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=1200" },
+  { id: 5, text: "Boreal Depth", color: "#10b981", img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200" },
+  { id: 6, text: "Permafrost Layer", color: "#ffffff", img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1200" },
+];
 
 export default function AboutPage() {
   return (
-    <main className="relative min-h-screen bg-[#020a12] text-[#bae6fd] selection:bg-[#0ea5e9] selection:text-white overflow-hidden">
-      
-      {/* LAYER 0: Glacial Atmospheric Depth (Cryosphere) */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        {/* Deep Arctic Base */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,_#071927_0%,_#020a12_100%)]" />
-        
-        {/* Glacial Blue Shaft (Sunlight through ice) */}
-        <div className="absolute top-0 right-[10%] w-[40%] h-[100%] bg-gradient-to-b from-[#7dd3fc] to-transparent opacity-10 blur-[120px] -rotate-12" />
-        
-        {/* Deep Ocean Pool (Bottom Left) */}
-        <div className="absolute -bottom-[10%] -left-[5%] w-[60%] h-[70%] bg-[#0c4a6e] opacity-30 blur-[100px] rounded-full" />
+    <main className="relative min-h-screen bg-black overflow-x-hidden">
+      <NetworkBackground />
 
-        {/* Crystalline Frost Grain */}
-        <div className="absolute inset-0 opacity-[0.04] mix-blend-screen" style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
-      </div>
-
-      <div className="relative z-10">
-        {/* PAGE INTRO: Explicitly forcing Glacial Blue and Snow White */}
-        <div className="[&_h1]:text-[#ffffff] [&_p]:text-[#7dd3fc]">
-          <PageIntro
-            title="About Iceberg"
-            lead="Iceberg is an environmental intelligence platform focused on evidence, transparency, and long-term environmental accountability."
-          />
+      <div className="relative z-10 pt-20">
+        {/* HOMEPAGE TYPOGRAPHY STYLE (NON-ITALIC) */}
+        <div className="px-6 md:px-20 mb-20">
+          <h1 className="text-6xl md:text-[10vw] font-black leading-[0.75] tracking-tighter text-white uppercase mb-10">
+             ABOUT <br /> <span className="text-[#7dd3fc]">ICEBERG</span>
+          </h1>
+          <p className="max-w-3xl text-2xl text-[#bae6fd] font-light leading-relaxed border-l-4 border-[#7dd3fc] pl-8">
+            Environmental intelligence modeled after glacial stability—permanent, verifiable, and crystalline.
+          </p>
         </div>
 
-        <PinnedNarrative
-          height={300}
-          ambient="guide"
-          visual={
-            <div className="group relative w-full h-full rounded-2xl bg-gradient-to-br from-[#071927] to-[#020a12] border border-[#7dd3fc]/20 shadow-[0_0_80px_rgba(125,211,252,0.1)] flex items-center justify-center overflow-hidden">
-              {/* Frozen fracture effect */}
-              <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] mix-blend-overlay" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(125,211,252,0.15)_0%,_transparent_70%)]" />
-              
-              <span className="relative text-[#f8fafc] text-[10px] font-black tracking-[0.6em] uppercase opacity-80">
-                Glacial Core
-              </span>
-            </div>
-          }
-          narrative={(progress) => {
-            const s1 = useNarrativeMotion(progress, { range: [0.10, 0.28] });
-            const s2 = useNarrativeMotion(progress, { range: [0.28, 0.46] });
-            const s3 = useNarrativeMotion(progress, { range: [0.46, 0.66] });
-            const s4 = useNarrativeMotion(progress, { range: [0.66, 0.88] });
-
-            return (
-              <div className="[&_h2]:text-[#ffffff] [&_h2]:font-bold">
-                {/* Ambient SVG: Ice Shards & Fractures */}
-                <motion.svg
-                  aria-hidden
-                  className="pointer-events-none absolute -left-64 top-0 w-[800px] h-[800px] opacity-20 mix-blend-screen"
-                  viewBox="0 0 600 600"
-                  fill="none"
-                  animate={{
-                    y: [0, -15, 0],
-                    rotate: [0, 2, 0]
-                  }}
-                  transition={{
-                    duration: 25,
-                    ease: "easeInOut",
-                    repeat: Infinity,
-                  }}
-                >
-                  <path d="M300 50 L550 400 L300 550 L50 400 Z" stroke="#7dd3fc" strokeWidth="1" fill="url(#ice-grad)" />
-                  <defs>
-                    <linearGradient id="ice-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#7dd3fc" stopOpacity="0.3" />
-                      <stop offset="100%" stopColor="#0ea5e9" stopOpacity="0.05" />
-                    </linearGradient>
-                  </defs>
-                </motion.svg>
-
-                <motion.div style={s1} className="relative mb-32">
-                  <PageSection title="Our Mission">
-                    <p className="text-[#bae6fd] leading-relaxed">
-                      Iceberg exists to make environmental systems legible. We work
-                      at the intersection of data, science, and public
-                      understanding.
-                    </p>
-                    <p className="mt-4 text-[#7dd3fc] font-medium border-l-2 border-[#0ea5e9] pl-4">
-                      Our goal is clarity through evidence, enabling responsible
-                      environmental action.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s2} className="relative mb-32">
-                  <PageSection title="How Iceberg Works">
-                    <p className="text-[#bae6fd] leading-relaxed">
-                      Environmental systems are complex and interconnected.
-                      Iceberg provides structured ways to interpret them.
-                    </p>
-                    <p className="mt-4 text-[#bae6fd] leading-relaxed">
-                      Systems thinking reveals relationships and long-term
-                      implications.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s3} className="relative mb-32">
-                  <PageSection title="Accountability & Transparency">
-                    <p className="text-[#bae6fd] leading-relaxed">
-                      Environmental claims require traceable evidence and
-                      verification.
-                    </p>
-                    <p className="mt-4 text-[#bae6fd] leading-relaxed italic">
-                      Iceberg prioritizes long-term accountability over offsets.
-                    </p>
-                  </PageSection>
-                </motion.div>
-
-                <motion.div style={s4} className="relative mb-32">
-                  <PageSection title="Our Values">
-                    <p className="text-[#bae6fd] leading-relaxed">
-                      Iceberg is guided by scientific integrity and community
-                      participation.
-                    </p>
-                    <p className="mt-4 text-[#bae6fd] leading-relaxed">
-                      Progress depends on shared understanding, not simplification.
-                    </p>
-                  </PageSection>
-                </motion.div>
+        {/* RE-IMPLEMENTED HORIZONTAL CAROUSEL (Moderate Scale) */}
+        <div className="flex overflow-x-auto pb-32 px-6 md:px-20 gap-10 no-scrollbar snap-x snap-mandatory">
+          {tiles.map((tile) => (
+            <motion.div 
+              key={tile.id}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-100px" }}
+              className="relative flex-shrink-0 w-[80vw] md:w-[500px] h-[400px] md:h-[600px] rounded-[40px] overflow-hidden snap-center group shadow-2xl border border-white/10"
+            >
+              <img 
+                src={tile.img} 
+                className="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700" 
+                alt={tile.text} 
+              />
+              <div className="absolute inset-0">
+                <EvervaultCard text={tile.text} accentColor={tile.color} />
               </div>
-            );
-          }}
-        />
-
-        {/* Powerful Close */}
-        <section className="py-48 text-center bg-gradient-to-t from-[#0ea5e9]/10 to-transparent">
-          <p className="text-[#7dd3fc] text-xs font-bold tracking-[0.5em] uppercase mb-6">
-            Purity of Evidence
-          </p>
-          <h2 className="text-[#ffffff] text-2xl font-light tracking-tight px-6 max-w-xl mx-auto">
-            Truth is as permanent as the ice.
-          </h2>
-        </section>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </main>
   );
