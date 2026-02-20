@@ -24,7 +24,7 @@ const initiatives = [
     title: "Eco-Artisan Collective",
     tag: "CULTURE",
     desc: "A bridge between technology and tradition, supporting indigenous craftsmen through cryptographically verified revenue streams.",
-    img: "https://images.unsplash.com/photo-1590732503028-406981180237?auto=format&fit=crop&q=80&w=1200",
+    img: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1200",
   },
 ];
 

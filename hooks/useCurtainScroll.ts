@@ -17,8 +17,9 @@ export const useCurtainScroll = (isIntroComplete: boolean) => {
       // SCROLLING DOWN
       if (scrollDirection === "down" && currentProgress < 1) {
         if (e.cancelable) e.preventDefault();
-        // REDUCED INCREMENT: 0.03 makes the "drop" take more scrolling
-        const nextValue = Math.min(1, currentProgress + 0.03); 
+        
+        // SIGNIFICANTLY REDUCED INCREMENT: 0.015 for ultra-slow control
+        const nextValue = Math.min(1, currentProgress + 0.015); 
         progress.set(nextValue);
         
         if (nextValue >= 1) setIsLocked(false);
@@ -28,7 +29,7 @@ export const useCurtainScroll = (isIntroComplete: boolean) => {
       if (scrollDirection === "up" && window.scrollY <= 10) {
         if (currentProgress > 0) {
           if (e.cancelable) e.preventDefault();
-          const nextValue = Math.max(0, currentProgress - 0.03);
+          const nextValue = Math.max(0, currentProgress - 0.015);
           progress.set(nextValue);
           setIsLocked(true);
         }
