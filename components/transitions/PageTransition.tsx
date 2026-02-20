@@ -1,14 +1,13 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-// Matching the aesthetic of your Hero Curtains
 const PANEL_COUNT = 5;
 const STAGGER = 0.12;
 const DURATION = 0.8;
-const transitionEase = [0.45, 0, 0.55, 1]; // Matching your mechanical feel
+const transitionEase = [0.45, 0, 0.55, 1];
 
 const PANELS = [
   { id: 0, color: "#050505" },
@@ -20,49 +19,36 @@ const PANELS = [
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  useEffect(() => {
-    if (!mounted) return;
-    setIsTransitioning(true);
-    
-    // Hold the curtains closed slightly longer for a cinematic feel
-    const timer = setTimeout(() => {
-      setIsTransitioning(false);
-    }, (DURATION + PANEL_COUNT * STAGGER) * 1100);
-    
-    return () => clearTimeout(timer);
-  }, [pathname, mounted]);
-
-  const panelVariants = {
+  /**
+   * THE FIX: 
+   * We use a single 'sweep' variant. 
+   * 1. Start at scaleX: 0 (Origin Left)
+   * 2. Grow to scaleX: 1 (Origin Left) -> This covers the screen.
+   * 3. Instantly flip Origin to Right.
+   * 4. Shrink to scaleX: 0 (Origin Right) -> This reveals the screen.
+   */
+  const panelVariants: any = {
     initial: {
       scaleX: 0,
+      originX: 0,
     },
     animate: (i: number) => ({
-      scaleX: 1,
+      scaleX: [0, 1, 1, 0], 
+      originX: [0, 0, 1, 1], // Pivot the origin mid-animation
       transition: {
-        duration: DURATION,
+        duration: DURATION * 1.5, // Total sweep time
+        times: [0, 0.4, 0.6, 1], // Timing of the keyframes
         delay: i * STAGGER,
         ease: transitionEase,
       },
     }),
-    exit: (i: number) => ({
-      scaleX: 0,
-      transition: {
-        duration: DURATION,
-        delay: i * STAGGER,
-        ease: transitionEase,
-      },
-      transitionEnd: {
-        scaleX: 0 // Reset for next transition
-      }
-    }),
-  } as any;
+  };
 
   if (!mounted) return <>{children}</>;
 
@@ -72,19 +58,22 @@ export default function PageTransition({ children }: { children: React.ReactNode
         {children}
       </main>
 
-      {/* CURTAIN OVERLAY: Horizontal Wipe */}
-      <div className="fixed inset-0 pointer-events-none z-[9999] flex flex-row">
+      {/* KEYED CONTAINER: 
+          Changing the 'key' to the pathname ensures the animation 
+          re-triggers exactly once per navigation.
+      */}
+      <div 
+        key={pathname} 
+        className="fixed inset-0 pointer-events-none z-[9999] flex flex-row"
+      >
         {PANELS.map((panel, i) => (
           <motion.div
             key={panel.id}
             custom={i}
             variants={panelVariants}
             initial="initial"
-            animate={isTransitioning ? "animate" : "exit"}
-            style={{ 
-              backgroundColor: panel.color,
-              originX: 0, // Wipes from Left to Right
-            }}
+            animate="animate"
+            style={{ backgroundColor: panel.color }}
             className="relative h-full w-full border-r border-white/5 last:border-none will-change-transform"
           />
         ))}
