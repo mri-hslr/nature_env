@@ -5,13 +5,13 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 const NARRATIVE_DATA = [
-  { id: 1, title: "CYAN HORIZON", sub: "Pacific Ocean", src: "https://images.unsplash.com/photo-1439405326854-014607f694d7?q=80&w=2000&auto=format&fit=crop" },
-  { id: 2, title: "VERDANT VEINS", sub: "Amazon Basin", src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=2000" },
-  { id: 3, title: "WHITE SILENCE", sub: "Arctic Shelf", src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=2000" },
-  { id: 4, title: "GOLDEN RANGE", sub: "Rocky Mountains", src: "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&q=80&w=1200" },
-  { id: 5, title: "DUSK EMBER", sub: "Sahara Dunes", src: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?auto=format&fit=crop&q=80&w=2000" },
-  { id: 6, title: "AZURE ABYSS", sub: "Great Barrier Reef", src: "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&q=80&w=1200" },
-  { id: 7, title: "LUSH SOLITUDE", sub: "Icelandic Highlands", src: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?auto=format&fit=crop&q=80&w=2000" },
+  { id: 1, title: "CYAN HORIZON", sub: "Pacific Ocean", src: "/image3.jpg" },
+  { id: 2, title: "VERDANT VEINS", sub: "Amazon Basin", src: "/image4.jpg" },
+  { id: 3, title: "WHITE SILENCE", sub: "Arctic Shelf", src: "/image5.jpg" },
+  { id: 4, title: "GOLDEN RANGE", sub: "Rocky Mountains", src: "/image6.jpg" },
+  { id: 5, title: "DUSK EMBER", sub: "Sahara Dunes", src: "/paragliding.jpg" },
+  { id: 6, title: "AZURE ABYSS", sub: "Great Barrier Reef", src: "/pexels-pixabay-70361.jpg" },
+  { id: 7, title: "LUSH SOLITUDE", sub: "Icelandic Highlands", src: "/pexels-pixabay-73759.jpg" },
 ];
 
 export const ImageScrollNarrative = () => {

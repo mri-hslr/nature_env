@@ -13,7 +13,7 @@ export const Hero = () => {
   // Sync text fade-out with the middle-to-end of the curtain wipe
   const textOpacity = useTransform(curtainProgress, [0.4, 0.8], [1, 0]);
 
-  const mainTitle = "NATURE";
+  const mainTitle = "BLUEPEDIA";
 
   const letterVariants: Variants = {
     initial: {

@@ -1,119 +1,135 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
-const resources = [
-  { id: "01", title: "Carbon Credits Guide Book", tag: "HANDBOOK", img: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&q=80&w=1200", desc: "Unlocking Revenue for a Cleaner Tomorrow: A guidebook for STUs / SPVs / ULBs / Bus Operators." },
-  { id: "02", title: "Types of Carbon Credits", tag: "MARKET ANALYSIS", img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1200", desc: "Primary Markets to generate Carbon Credits from. Information Note on Reduced emissions and Removal of CO2." },
-  { id: "03", title: "Carbon Credit Framework", tag: "GOVERNANCE", img: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200", desc: "United Nations Framework Convention on Climate Change (UNFCCC). Global carbon accounting standards." },
-  { id: "04", title: "World Bank Report", tag: "POLICY", img: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200", desc: "A Guide to developing Domestic Carbon Crediting Mechanisms by the World Bank Group." },
+const NARRATIVE_CONTENT = [
+  {
+    id: "01",
+    title: "The Whitepapers",
+    text: "Access the foundational research driving our climate intelligence. These documents outline the mathematical proofs for our decentralized monitoring nodes and satellite telemetry.",
+    image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "02",
+    title: "Visual Archives",
+    text: "A curated collection of satellite imagery and field photography documenting ecological shifts. High-resolution proof of the planet's changing narrative.",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1200",
+  },
+  {
+    id: "03",
+    title: "Protocol Docs",
+    text: "Technical documentation for developers looking to integrate with the 10x network. From API endpoints to MERN-stack deployment guides for localized nodes.",
+    image: "https://images.unsplash.com/photo-1516116216624-53e697fedbea?auto=format&fit=crop&q=80&w=1200",
+  },
 ];
 
 export default function LibraryPage() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  
-  // 1. TRACK SCROLL PROGRESS
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // ✅ EXACT SAME SCROLL LOGIC
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // 2. MAP SCROLL TO COLORS
-  // Page starts Orange (#ea580c) and ends in a Vibrant Yellow (#fbbf24)
+  // ✅ COLOR DUALITY: DEEP SLATE (#0f172a) TO PAPER WHITE (#f8fafc)
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 1],
-    ["#ea580c", "#fbbf24"]
+    ["#0f172a", "#f8fafc"]
   );
 
   return (
-    <motion.main 
-      ref={targetRef}
-      style={{ backgroundColor }} // Dynamic background binding
-      className="relative min-h-screen text-black transition-colors duration-500 selection:bg-black selection:text-white"
+    <motion.main
+      ref={containerRef}
+      style={{ backgroundColor }}
+      className="relative min-h-screen transition-colors duration-500"
     >
-      
-      {/* ATMOSPHERE: Liquid Pigment Layer */}
+      {/* BACKGROUND */}
       <div className="fixed inset-0 z-0">
-        <BackgroundGradientAnimation 
+        <BackgroundGradientAnimation
           containerClassName="h-full w-full"
-          firstColor="234, 88, 12"   // Base Orange
-          secondColor="251, 146, 60" // Light Amber
-          thirdColor="154, 52, 18"   // Burnt Sienna
+          firstColor="15, 23, 42"    // Slate 900
+          secondColor="30, 41, 59"   // Slate 800
+          thirdColor="248, 250, 252" // Slate 50
+          fourthColor="203, 213, 225" // Slate 300
+          fifthColor="2, 6, 23"      // Blackest Blue
         />
-        <div className="absolute inset-0 opacity-[0.1] pointer-events-none mix-blend-overlay" 
-             style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
+        <div
+          className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-overlay"
+          style={{
+            backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
+          }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-32">
-        <header className="mb-48">
-          <motion.p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
-            Institutional Resource
-          </motion.p>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            className="text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.75] mb-12 uppercase"
-          >
-            Library <br /> <span className="opacity-40">Archive</span>
-          </motion.h1>
-          <p className="max-w-2xl text-2xl md:text-3xl font-medium leading-tight">
-            A curated collection of research and datasets supporting 
-            evidence-based environmental understanding.
-          </p>
-        </header>
-
-        <section className="relative">
-          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-black/20" />
-
-          {resources.map((item) => (
-            <motion.div 
-              key={item.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              className="group pl-12 mb-64"
-            >
-              <div className="flex flex-col md:flex-row gap-16">
-                <div className="md:w-1/3">
-                  <span className="text-lg font-mono text-black/40 mb-4 block">
-                    INDEX {item.id}
-                  </span>
-                  <p className="text-[12px] font-black tracking-[0.2em] uppercase text-black border-b-2 border-black inline-block pb-1">
-                    {item.tag}
-                  </p>
-                </div>
-
-                <div className="md:w-2/3">
-                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.8] uppercase">
-                    {item.title}
-                  </h2>
-                  <div className="aspect-[16/10] w-full overflow-hidden mb-12 rounded-sm bg-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.1)]">
-                     <img 
-                       src={item.img} 
-                       alt={item.title}
-                       className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[1s]" 
-                     />
-                  </div>
-                  <p className="text-xl md:text-2xl font-medium leading-snug">
-                    {item.desc}
-                  </p>
-                  <button className="text-sm font-black tracking-[0.4em] uppercase py-4 px-8 border-2 border-black hover:bg-black hover:text-white transition-all">
-                    Access Record
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+      <div className="relative z-10">
+        {/* HEADER SECTION */}
+        <section className="h-[60vh] flex items-end px-6 md:px-12 pb-24">
+          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8]">
+            The <br /> <span className="opacity-20 text-black">Library</span>
+          </h1>
         </section>
 
-        <footer className="mt-96 pb-32 text-center border-t-2 border-black pt-24">
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-black uppercase">
-            Permanent Record
+        {/* SPLIT NARRATIVE SECTION */}
+        <section className="relative flex flex-col md:flex-row w-full">
+          {/* LEFT COLUMN */}
+          <div className="w-full md:w-1/2 px-6 md:px-12 py-32 space-y-[60vh]">
+            {NARRATIVE_CONTENT.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                className="max-w-xl"
+                onViewportEnter={() => setActiveIndex(idx)}
+                viewport={{ amount: 0.5 }}
+              >
+                <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
+                  Collection // {item.id}
+                </p>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black uppercase mb-8">
+                  {item.title}
+                </h2>
+                <p className="text-xl md:text-2xl font-medium leading-relaxed text-black/80">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
+            <div className="h-[40vh]" />
+          </div>
+
+          {/* RIGHT PINNED COLUMN */}
+          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden bg-black/10 border-l border-black/5">
+            <div className="relative w-full h-full flex items-center justify-center p-12">
+              <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-zinc-900">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeIndex}
+                    src={NARRATIVE_CONTENT[activeIndex].image}
+                    initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+                    animate={{ opacity: 0.8, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                    transition={{
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="w-full h-full object-cover"
+                    alt="Library Resource Visual"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FOOTER SECTION */}
+        <section className="h-screen flex items-center justify-center border-t border-black/10">
+          <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase text-black opacity-10">
+            Information is the fuel
           </h2>
-        </footer>
+        </section>
       </div>
     </motion.main>
   );

@@ -1,13 +1,22 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-const PANEL_COUNT = 4;
-const STAGGER = 0.1;
-const DURATION = 0.6;
-const transitionEase = [0.76, 0, 0.24, 1];
+// Matching the aesthetic of your Hero Curtains
+const PANEL_COUNT = 5;
+const STAGGER = 0.12;
+const DURATION = 0.8;
+const transitionEase = [0.45, 0, 0.55, 1]; // Matching your mechanical feel
+
+const PANELS = [
+  { id: 0, color: "#050505" },
+  { id: 1, color: "#080808" },
+  { id: 2, color: "#0a0a0a" },
+  { id: 3, color: "#0c0c0c" },
+  { id: 4, color: "#000000" },
+];
 
 export default function PageTransition({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
@@ -21,20 +30,21 @@ export default function PageTransition({ children }: { children: React.ReactNode
   useEffect(() => {
     if (!mounted) return;
     setIsTransitioning(true);
+    
+    // Hold the curtains closed slightly longer for a cinematic feel
     const timer = setTimeout(() => {
       setIsTransitioning(false);
-    }, (DURATION + PANEL_COUNT * STAGGER) * 1000);
+    }, (DURATION + PANEL_COUNT * STAGGER) * 1100);
+    
     return () => clearTimeout(timer);
   }, [pathname, mounted]);
 
-  // We use 'as any' or 'as Variants' here to bypass the strict index signature check.
-  // This is the standard "industry fix" for dynamic Framer Motion variants in TS.
   const panelVariants = {
     initial: {
-      scaleY: 0,
+      scaleX: 0,
     },
     animate: (i: number) => ({
-      scaleY: 1,
+      scaleX: 1,
       transition: {
         duration: DURATION,
         delay: i * STAGGER,
@@ -42,14 +52,17 @@ export default function PageTransition({ children }: { children: React.ReactNode
       },
     }),
     exit: (i: number) => ({
-      scaleY: 0,
+      scaleX: 0,
       transition: {
         duration: DURATION,
         delay: i * STAGGER,
         ease: transitionEase,
       },
+      transitionEnd: {
+        scaleX: 0 // Reset for next transition
+      }
     }),
-  } as any; 
+  } as any;
 
   if (!mounted) return <>{children}</>;
 
@@ -59,33 +72,23 @@ export default function PageTransition({ children }: { children: React.ReactNode
         {children}
       </main>
 
+      {/* CURTAIN OVERLAY: Horizontal Wipe */}
       <div className="fixed inset-0 pointer-events-none z-[9999] flex flex-row">
-        {[...Array(PANEL_COUNT)].map((_, i) => (
+        {PANELS.map((panel, i) => (
           <motion.div
-            key={i}
+            key={panel.id}
             custom={i}
             variants={panelVariants}
             initial="initial"
             animate={isTransitioning ? "animate" : "exit"}
-            className="relative h-full w-full origin-top"
             style={{ 
-              backgroundColor: i % 2 === 0 ? "#0a0a0a" : "#161616" 
+              backgroundColor: panel.color,
+              originX: 0, // Wipes from Left to Right
             }}
+            className="relative h-full w-full border-r border-white/5 last:border-none will-change-transform"
           />
         ))}
       </div>
-
-      <AnimatePresence mode="wait">
-        {isTransitioning && (
-          <motion.div 
-            key="blocker"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[10000] cursor-wait pointer-events-auto bg-transparent" 
-          />
-        )}
-      </AnimatePresence>
     </>
   );
 }

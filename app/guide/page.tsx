@@ -1,147 +1,135 @@
 "use client";
 
-import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import React, { useRef, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
-const guideSteps = [
+const NARRATIVE_CONTENT = [
   {
     id: "01",
-    title: "Understanding Baseline",
-    tag: "ORIENTATION",
-    desc: "Establishing a verifiable environmental baseline is the first step toward permanent stability. Learn how to audit existing ecosystem data.",
-    img: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&q=80&w=1200",
+    title: "Node Integration",
+    text: "Initialize your local environment by synchronizing with the core 10x network protocols. This establishes your unique signature within the decentralized monitoring grid.",
+    image: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "02",
-    title: "Carbon Verification",
-    tag: "METHODOLOGY",
-    desc: "A deep dive into the 2026 Transparency Framework for carbon crediting. Verifying credits through decentralized nodes.",
-    img: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=1200",
+    title: "Data Harvesting",
+    text: "Leverage integrated AI models to parse environmental datasets. Identify climate anomalies through real-time satellite telemetry and local sensory inputs.",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&q=80&w=1200",
   },
   {
     id: "03",
-    title: "Ecosystem Integration",
-    tag: "IMPLEMENTATION",
-    desc: "Mapping your environmental intelligence to global monitoring systems for real-time reporting and impact analysis.",
-    img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&q=80&w=1200",
+    title: "Consensus Export",
+    text: "Finalize your findings by committing them to the global ledger. Verified data streams ensure transparency and drive collective climate action across all nodes.",
+    image: "https://images.unsplash.com/photo-1639322537228-f710d846310a?auto=format&fit=crop&q=80&w=1200",
   },
 ];
 
 export default function GuidePage() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  
-  // 1. TRACK SCROLL PROGRESS
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  // ✅ EXACT SAME SCROLL LOGIC
   const { scrollYProgress } = useScroll({
-    target: targetRef,
+    target: containerRef,
     offset: ["start start", "end end"],
   });
 
-  // 2. MAP SCROLL: AMBER (#f59e0b) TO CRIMSON (#991b1b)
+  // ✅ COLOR DUALITY: CYBER GOLD (#fbbf24) TO ONYX (#0a0a0a)
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 1],
-    ["#f59e0b", "#991b1b"] 
+    ["#fbbf24", "#0a0a0a"]
   );
 
   return (
-    <motion.main 
-      ref={targetRef}
+    <motion.main
+      ref={containerRef}
       style={{ backgroundColor }}
-      className="relative min-h-screen text-black selection:bg-black selection:text-white overflow-x-hidden"
+      className="relative min-h-screen transition-colors duration-500"
     >
-      
-      {/* ATMOSPHERE: Dynamic Liquid Pigment Layer */}
+      {/* BACKGROUND */}
       <div className="fixed inset-0 z-0">
-        <BackgroundGradientAnimation 
+        <BackgroundGradientAnimation
           containerClassName="h-full w-full"
-          firstColor="245, 158, 11"    // Base Amber
-          secondColor="251, 191, 36"   // Light Amber
-          thirdColor="220, 38, 38"     // Red
-          fourthColor="185, 28, 28"    // Crimson
-          fifthColor="69, 10, 10"      // Deep Blood
+          firstColor="251, 191, 36"   // Gold
+          secondColor="217, 119, 6"   // Amber
+          thirdColor="10, 10, 10"     // Onyx
+          fourthColor="38, 38, 38"    // Neutral 800
+          fifthColor="245, 158, 11"   // Yellow 500
         />
-        <div className="absolute inset-0 opacity-[0.2] pointer-events-none mix-blend-overlay" 
-             style={{ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')` }} />
+        <div
+          className="absolute inset-0 opacity-[0.15] pointer-events-none mix-blend-overlay"
+          style={{
+            backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
+          }}
+        />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 md:px-12 py-32">
-        <header className="mb-48">
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8"
-          >
-            Tactical Manual
-          </motion.p>
-          <motion.h1 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.2 }}
-            className="text-7xl md:text-[11vw] font-black tracking-tighter leading-[0.75] mb-12 uppercase"
-          >
-            The <br /> <span className="opacity-40">Guide</span>
-          </motion.h1>
-          <p className="max-w-2xl text-2xl md:text-3xl font-medium leading-tight">
-            A comprehensive protocol for implementing environmental 
-            intelligence within your local ecosystem.
-          </p>
-        </header>
-
-        <section className="relative">
-          {/* Editorial Vertical Spine */}
-          <div className="absolute left-0 top-0 bottom-0 w-[2px] bg-black/20" />
-
-          {guideSteps.map((step) => (
-            <motion.div 
-              key={step.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-10%" }}
-              className="group pl-12 mb-64"
-            >
-              <div className="flex flex-col md:flex-row gap-16">
-                <div className="md:w-1/3">
-                  <span className="text-lg font-mono text-black/40 mb-4 block">
-                    STEP {step.id}
-                  </span>
-                  <p className="text-[12px] font-black tracking-[0.2em] uppercase text-black border-b-2 border-black inline-block pb-1">
-                    {step.tag}
-                  </p>
-                </div>
-
-                <div className="md:w-2/3 text-black">
-                  <h2 className="text-5xl md:text-8xl font-black tracking-tighter mb-8 leading-[0.8] uppercase group-hover:text-white transition-colors duration-500">
-                    {step.title}
-                  </h2>
-                  
-                  <div className="aspect-[16/10] w-full overflow-hidden mb-12 rounded-sm bg-black/10 shadow-[20px_20px_0px_rgba(0,0,0,0.1)] transition-all">
-                     <img 
-                       src={step.img} 
-                       alt={step.title}
-                       className="w-full h-full object-cover grayscale mix-blend-multiply opacity-80 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-[2s]" 
-                     />
-                  </div>
-                  
-                  <p className="text-xl md:text-2xl font-medium leading-snug mb-12">
-                    {step.desc}
-                  </p>
-                  
-                  <button className="text-sm font-black tracking-[0.4em] uppercase py-4 px-8 border-2 border-black hover:bg-black hover:text-[#f59e0b] transition-all">
-                    Learn Step {step.id}
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+      <div className="relative z-10">
+        {/* HEADER SECTION */}
+        <section className="h-[60vh] flex items-end px-6 md:px-12 pb-24">
+          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8]">
+            The <br /> <span className="opacity-20 text-black">Guide</span>
+          </h1>
         </section>
 
-        <footer className="mt-96 pb-32 text-center border-t-2 border-black pt-24">
-          <h2 className="text-5xl md:text-8xl font-black tracking-tighter text-black uppercase">
-            Permanent Path
+        {/* SPLIT NARRATIVE SECTION */}
+        <section className="relative flex flex-col md:flex-row w-full">
+          {/* LEFT COLUMN */}
+          <div className="w-full md:w-1/2 px-6 md:px-12 py-32 space-y-[60vh]">
+            {NARRATIVE_CONTENT.map((item, idx) => (
+              <motion.div
+                key={item.id}
+                className="max-w-xl"
+                onViewportEnter={() => setActiveIndex(idx)}
+                viewport={{ amount: 0.5 }}
+              >
+                <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
+                  Protocol // {item.id}
+                </p>
+                <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black uppercase mb-8">
+                  {item.title}
+                </h2>
+                <p className="text-xl md:text-2xl font-medium leading-relaxed text-black/80">
+                  {item.text}
+                </p>
+              </motion.div>
+            ))}
+            <div className="h-[40vh]" />
+          </div>
+
+          {/* RIGHT PINNED COLUMN */}
+          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden bg-black/10 border-l border-black/5">
+            <div className="relative w-full h-full flex items-center justify-center p-12">
+              <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-zinc-900">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={activeIndex}
+                    src={NARRATIVE_CONTENT[activeIndex].image}
+                    initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+                    animate={{ opacity: 0.8, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+                    transition={{
+                      duration: 0.7,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
+                    className="w-full h-full object-cover"
+                    alt="Guide Operational Visual"
+                  />
+                </AnimatePresence>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FOOTER SECTION */}
+        <section className="h-screen flex items-center justify-center border-t border-black/10">
+          <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase text-black opacity-10">
+            Clarity is the foundation
           </h2>
-          <p className="mt-8 text-xl font-bold uppercase tracking-[0.5em]">Stability is found in the depth of truth.</p>
-        </footer>
+        </section>
       </div>
     </motion.main>
   );
