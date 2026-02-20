@@ -69,7 +69,7 @@ export const HomeScrollSequence = () => {
       {/* SECTION 2: MONOCHROMATIC OVERLAP SECTION (PRESERVED) */}
       <motion.section 
         style={{ translateY: monoTranslateY }}
-        className="sticky top-0 z-30 h-screen w-full flex items-center justify-center bg-[#ea580c] will-change-transform shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
+        className="sticky top-0 z-30 h-screen w-full flex items-center justify-center bg-[#064e3b] will-change-transform shadow-[0_-20px_50px_rgba(0,0,0,0.3)]"
       >
         <motion.div 
           style={{ color: monoTextColor }}
@@ -91,7 +91,7 @@ export const HomeScrollSequence = () => {
       </motion.section>
 
       {/* Spacer for the scroll track length to ensure Section 2 pins correctly */}
-      <div className="h-screen w-full bg-[#ea580c]" />
+      <div className="h-screen w-full bg-[#064e3b]" />
     </div>
   );
 };
