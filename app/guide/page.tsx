@@ -426,7 +426,7 @@ export default function GuidePage() {
                           <span className="text-xs font-bold text-black/40">
                             {i < 9 ? `0${i + 1}` : i + 1}
                           </span>
-                          <h3 className="text-xl md:text-2xl lg:text-4xl font-black text-black uppercase leading-tight tracking-tighter">
+                          <h3 className="text-xl md:text-1xl lg:text-2xl font-black text-black uppercase leading-tight tracking-tighter">
                             {point}
                           </h3>
                         </div>
