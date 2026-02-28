@@ -20,7 +20,7 @@ export default function LoginPage() {
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 1],
-    ["#b45309", "#171717"] 
+    ["#a855f7", "#2e1065"] 
   );
 
   return (

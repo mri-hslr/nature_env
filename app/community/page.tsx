@@ -68,9 +68,10 @@ export default function CommunityPage() {
 
       <div className="relative z-10">
         {/* HEADER SECTION */}
-        <section className="h-[60vh] flex items-end px-6 md:px-12 pb-24">
-          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8]">
-            The <br /> <span className="opacity-20 text-black">Network</span>
+        {/* HEADER SECTION */}
+        <section className="h-[60vh] flex items-center justify-center px-6 md:px-12">
+          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8] text-center">
+            The  <span className="opacity-20 text-black">Network</span>
           </h1>
         </section>
 
@@ -100,9 +101,11 @@ export default function CommunityPage() {
           </div>
 
           {/* RIGHT PINNED COLUMN */}
-          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden bg-black/10 border-l border-black/5">
-            <div className="relative w-full h-full flex items-center justify-center p-12">
-              <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-zinc-900">
+              {/* RIGHT PINNED COLUMN */}
+              {/* RIGHT PINNED COLUMN */}
+            <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden">
+              <div className="relative w-full h-full flex items-center justify-center">
+                <div className="relative w-full h-full overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeIndex}

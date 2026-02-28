@@ -42,7 +42,7 @@ export const Header = () => {
           */
           className="text-white text-base font-bold uppercase tracking-[0.5em] leading-none hover:opacity-70 transition-opacity duration-300"
         >
-          Nature / Ecosystem
+         Blupedia
         </Link>
       </div>
 

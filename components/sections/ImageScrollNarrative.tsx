@@ -23,13 +23,14 @@ export const ImageScrollNarrative = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
+    stiffness: 200,
+    damping: 40,
+    mass:0.5,
     restDelta: 0.001
   });
 
   // Use a 0.1 buffer to ensure user reaches the section before images move
-  const mainX = useTransform(smoothProgress, [0, 0.1, 1], ["0%", "0%", "-86%"]);
+  const mainX = useTransform(smoothProgress, [0, 0.05, 1], ["0%", "0%", "-90%"]);
 
   return (
     <section ref={targetRef} className="relative h-[800vh] bg-[#050505]">

@@ -29,7 +29,7 @@ const PixelTile = ({
   const y = useTransform(progress, [0, 1], [`${yOffset}px`, "0px"]);
   const rotate = useTransform(progress, [0, 1], [rotOffset, 0]);
   const scale = useTransform(progress, [0, 1], [chaoticScale, 1]);
-  const opacity = useTransform(progress, [0, 0.2, 0.8, 1], [0.1, 0.4, 0.8, 1]);
+  const opacity = useTransform(progress, [0, 0.1, 0.4, 0.6], [0.1, 0.4, 0.8, 1]);
 
   return (
     <motion.div
@@ -49,9 +49,10 @@ const EmphasisLine = ({
   i: number; 
   progress: MotionValue<number> 
 }) => {
-  const opacity = useTransform(progress, [0.7 + (i * 0.04), 0.95], [0, 1]);
-  const y = useTransform(progress, [0.7 + (i * 0.04), 0.95], [40, 0]);
-  const filter = useTransform(progress, [0.7, 0.9], ["blur(10px)", "blur(0px)"]);
+  // Change the start of the range from 0.7 to 0.4
+const opacity = useTransform(progress, [0.4 + (i * 0.04), 0.8], [0, 1]);
+const y = useTransform(progress, [0.4 + (i * 0.04), 0.8], [40, 0]);
+const filter = useTransform(progress, [0.4, 0.7], ["blur(10px)", "blur(0px)"]);
 
   return (
     <motion.div
@@ -78,7 +79,7 @@ export const Emphasis = () => {
     if ((scrollingDown && current < 1) || (scrollingUp && current > 0)) {
       if (e.cancelable) e.preventDefault();
       
-      const sensitivity = 2800; 
+      const sensitivity = 1200; 
       const delta = e.deltaY / sensitivity;
       const next = Math.min(Math.max(current + delta, 0), 1);
       

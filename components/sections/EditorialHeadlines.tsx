@@ -18,8 +18,9 @@ export const EditorialHeadlines: React.FC<EditorialProps> = ({ progress }) => {
   // Appearance logic:
   // Starts appearing early (0.05) as Hero slides, solid at 0.12, 
   // fades out by 0.20 before Chapter 1 gets fully pinned.
-  const opacity = useTransform(progress, [0.05, 0.12, 0.18, 0.22], [0, 1, 1, 0]);
-  const scale = useTransform(progress, [0.05, 0.12], [0.95, 1]);
+  // Now starts appearing at 0.02 instead of 0.05, and solid by 0.06
+const opacity = useTransform(progress, [0.01, 0.06, 0.10, 0.15], [0, 1, 1, 0]);
+const scale = useTransform(progress, [0.01, 0.06], [0.98, 1]);
 
   return (
     <div className="relative h-screen w-full flex items-center bg-black overflow-hidden z-[60]">

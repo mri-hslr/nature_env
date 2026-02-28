@@ -38,7 +38,7 @@ export default function BlogPage() {
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 1],
-    ["#059669", "#84cc16"]
+    [ "#f97316","#451a03"]
   );
 
   return (
@@ -66,11 +66,12 @@ export default function BlogPage() {
       </div>
 
       <div className="relative z-10">
-        <section className="h-[60vh] flex items-end px-6 md:px-12 pb-24">
-          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8]">
-            The <br /> <span className="opacity-20 text-black">Project</span>
-          </h1>
-        </section>
+        {/* HEADER SECTION */}
+      <section className="h-[60vh] flex items-center justify-center px-6 md:px-12">
+        <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8] text-center">
+          The  <span className="opacity-20 text-black">Project</span>
+        </h1>
+      </section>
 
         <section className="relative flex flex-col md:flex-row w-full">
           <div className="w-full md:w-1/2 px-6 md:px-12 py-32 space-y-[60vh]">
@@ -95,9 +96,10 @@ export default function BlogPage() {
             <div className="h-[40vh]" />
           </div>
 
-          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden bg-black/10 border-l border-black/5">
-            <div className="relative w-full h-full flex items-center justify-center p-12">
-              <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-zinc-900">
+          {/* RIGHT PINNED COLUMN */}
+<div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden">
+  <div className="relative w-full h-full flex items-center justify-center">
+    <div className="relative w-full h-full overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeIndex}

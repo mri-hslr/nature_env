@@ -11,7 +11,7 @@ export const Hero = () => {
   const curtainProgress = useCurtainScroll(isComplete);
 
   // Sync text fade-out with the middle-to-end of the curtain wipe
-  const textOpacity = useTransform(curtainProgress, [0.4, 0.8], [1, 0]);
+  const textOpacity = useTransform(curtainProgress, [0.1, 0.4], [1, 0]);
 
   const mainTitle = "BLUPEDIA";
 

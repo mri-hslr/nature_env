@@ -37,10 +37,77 @@ const NARRATIVE_CONTENT = [
   },
   {
     id: "06",
-    title: "Safety & Future",
-    text: "Blupedia is legal in India and safe for students. We teach future-ready skills that combine environmental awareness, tech literacy, and creative innovation.",
+    title: "Why are carbon credits important?",
+    text: "Carbon credits help fight climate change by: Supporting clean energy projects, Protecting forests, Encouraging sustainable practices",
     image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&q=80&w=1200",
   },
+  {
+    id: "07",
+    title: "Do I need technical or coding knowledge?",
+    text: "No. Blupedia is designed for beginners. You don’t need any technical background to explore or learn.",
+    image: "f1.jpg",
+  },
+  {
+    id: "08",
+    title: "Are carbon credits real or just digital?",
+    text: "Carbon credits represent real environmental actions. They are recorded digitally so they can be tracked, verified, and audited",
+    image: "f2.jpg",
+  },
+  {
+    id: "09",
+    title: "How does Blupedia connect NFTs to carbon credits?",
+    text: "Blupedia links NFTs to verified climate projects, allowing digital records to represent real environmental impact",
+    image: "f3.jpg",
+  },
+  {
+    id: "10",
+    title: "Is Blupedia safe for students?",
+    text: "Yes. Blupedia focuses on education, transparency, and responsible use of technology",
+    image: "f4.jpg",
+  },
+  {
+    id: "11",
+    title: "Can students own NFTs?",
+    text: "Yes. Students can own NFTs as learning tools or digital records, as long as they follow platform guidelines and local laws",
+    image: "f5.jpg",
+  },
+  {
+    id: "12",
+    title: "Is Blupedia legal in India?",
+    text: "Yes. Blupedia operates within applicable legal frameworks and focuses on education, sustainability, and innovation",
+    image: "f6.jpg",
+  },
+  {
+    id: "13",
+    title: "Do I need to invest money to use Blupedia?",
+    text: "No. Many learning resources on Blupedia are free. Some advanced features may be optional",
+    image: "f7.jpg",
+  },
+  {
+    id: "14",
+    title: "What is an ADSTR token?",
+    text: "ADSTR is a digital utility token used within the Blupedia ecosystem for access, participation, rewards, and platform activities.",
+    image: "f8.jpg",
+  },
+  {
+    id: "15",
+    title: "Is ADSTR the same as Bitcoin or cryptocurrency trading?",
+    text: "No. ADSTR is not meant for speculation. It is designed for use within Blupedia, not as a general investment currency.",
+    image: "f9.jpg",
+  },
+  {
+    id: "16",
+    title: "Do ADSTR tokens have value?",
+    text: "Yes. Their value comes from how they are used within the Blupedia platform — not from hype or price speculation.",
+    image: "f10.jpg",
+  },
+  {
+    id: "17",
+    title: "Can I earn ADSTR tokens?",
+    text: "Yes. Users may earn ADSTR tokens by participating in Blupedia programs, learning activities, or approved contributions.",
+    image: "f11.jpg",
+  },
+
 ];
 
 export default function FAQPage() {
@@ -57,7 +124,7 @@ export default function FAQPage() {
   const backgroundColor = useTransform(
     scrollYProgress,
     [0, 1],
-    ["#064e3b", "#22d3ee"]
+    ["#059669", "#84cc16"]
   );
 
   return (
@@ -86,9 +153,9 @@ export default function FAQPage() {
 
       <div className="relative z-10">
         {/* HEADER SECTION */}
-        <section className="h-[60vh] flex items-end px-6 md:px-12 pb-24">
-          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8]">
-            The <br /> <span className="opacity-20 text-black">FAQ</span>
+        <section className="h-[60vh] flex items-center justify-center px-6 md:px-12">
+          <h1 className="text-7xl md:text-[12vw] font-black tracking-tighter uppercase text-white leading-[0.8] text-centre">
+            The  <span className="opacity-20 text-black">FAQ</span>
           </h1>
         </section>
 
@@ -118,9 +185,9 @@ export default function FAQPage() {
           </div>
 
           {/* RIGHT PINNED COLUMN */}
-          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden bg-black/10 border-l border-black/5">
-            <div className="relative w-full h-full flex items-center justify-center p-12">
-              <div className="relative w-full h-full overflow-hidden rounded-sm shadow-2xl bg-zinc-900">
+          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden">
+            <div className="relative w-full h-full flex items-center justify-center ">
+              <div className="relative w-full h-full overflow-hidden ">
                 <AnimatePresence mode="wait">
                   <motion.img
                     key={activeIndex}

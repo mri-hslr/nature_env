@@ -7,11 +7,14 @@ module.exports = {
   theme: {
     extend: {
       animation: {
+        // Gradient Background Animations
         first: "moveVertical 30s ease infinite",
         second: "moveInCircle 20s reverse infinite",
         third: "moveInCircle 40s linear infinite",
         fourth: "moveHorizontal 40s ease infinite",
         fifth: "moveInCircle 20s ease infinite",
+        // ✅ Meteor Animation
+        "meteor-effect": "meteor 5s linear infinite",
       },
       keyframes: {
         moveHorizontal: {
@@ -28,6 +31,15 @@ module.exports = {
           "0%": { transform: "translateY(-50%)" },
           "50%": { transform: "translateY(50%)" },
           "100%": { transform: "translateY(-50%)" },
+        },
+        // ✅ Updated Meteor Keyframes for full-screen travel
+        meteor: {
+          "0%": { transform: "rotate(215deg) translateX(0)", opacity: "1" },
+          "70%": { opacity: "1" },
+          "100%": {
+            transform: "rotate(215deg) translateX(-1000px)",
+            opacity: "0",
+          },
         },
       },
     },

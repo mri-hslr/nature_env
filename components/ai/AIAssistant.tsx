@@ -18,7 +18,7 @@ export const AIAssistant = () => {
   const [input, setInput] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [messages, setMessages] = useState([
-    { id: 1, role: "assistant", text: "Welcome. How can I assist with your environmental research today?" }
+    { id: 1, role: "assistant", text: "Welcome to our site! I’m the digital clone of our founder, Mittal Maurya, here to answer any questions you have and guide you around. How can I help you today?" }
   ]);
   
   const pathname = usePathname();
