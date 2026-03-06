@@ -9,13 +9,15 @@ const NARRATIVE_CONTENT = [
     id: "01",
     title: "Global Summit",
     text: "Convening the world's leading environmental architects to synchronize on climate intelligence protocols and decentralized action.",
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2000"
+    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2000",
+    overlay: "rgba(76, 29, 149, 0.4)" // Deep Violet Tint
   },
   {
     id: "02",
     title: "Field Intelligence",
     text: "Live monitoring sessions from the Dehradun node, showcasing real-time data harvesting and indigenous collaboration.",
-    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=2000"
+    image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=2000",
+    
   },
   {
     id: "03",
@@ -78,7 +80,7 @@ export default function EventsPage() {
         {/* SPLIT NARRATIVE SECTION */}
         <section className="relative flex flex-col md:flex-row w-full">
           {/* LEFT COLUMN */}
-          <div className="w-full md:w-1/2 px-6 md:px-12 py-32 space-y-[60vh]">
+          <div className="w-full md:w-[70%] px-6 md:px-12 py-32 space-y-[60vh]">
             {NARRATIVE_CONTENT.map((item, idx) => (
               <motion.div
                 key={item.id}
@@ -102,26 +104,44 @@ export default function EventsPage() {
 
           {/* RIGHT PINNED COLUMN */}
           {/* RIGHT PINNED COLUMN */}
-<div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden">
+               {/* RIGHT PINNED COLUMN */}
+{/* RIGHT PINNED COLUMN */}
+{/* 1. Added 'relative' to the parent to fix the scroll offset warning */}
+<div className="hidden md:block w-[30%] h-screen sticky top-0 overflow-hidden">
   <div className="relative w-full h-full flex items-center justify-center">
-    <div className="relative w-full h-full overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeIndex}
-                    src={NARRATIVE_CONTENT[activeIndex].image}
-                    initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-                    animate={{ opacity: 0.8, scale: 1, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-                    transition={{
-                      duration: 0.7,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="w-full h-full object-cover"
-                    alt="Narrative Visual"
-                  />
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
-              </div>
+  <div className="relative w-full h-full overflow-hidden">
+
+<AnimatePresence mode="wait">
+  <motion.img
+    key={activeIndex}
+    src={NARRATIVE_CONTENT[activeIndex].image}
+    initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+    animate={{ opacity: 0.9, scale: 1, filter: "blur(0px)" }}
+    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+    transition={{
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
+    }}
+    className="w-full h-full object-cover"
+    alt="Narrative Visual"
+  />
+</AnimatePresence>
+
+{/* COLOR OVERLAY */}
+{NARRATIVE_CONTENT[activeIndex].overlay && (
+  <div
+    className="absolute inset-0 pointer-events-none z-[2]"
+    style={{
+      background: NARRATIVE_CONTENT[activeIndex].overlay,
+      mixBlendMode: "multiply",
+    }}
+  />
+)}
+
+{/* GRADIENT OVERLAY */}
+<div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none z-[3]" />
+
+</div>
             </div>
           </div>
         </section>

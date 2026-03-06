@@ -64,15 +64,24 @@ export const ImageScrollNarrative = () => {
           className="flex gap-[15vw] px-[15vw] items-center transform-gpu will-change-transform z-10"
         >
           {NARRATIVE_DATA.map((item, i) => {
-            const segmentSize = 0.9 / NARRATIVE_DATA.length;
-            const start = 0.1 + (i * segmentSize);
-            const end = 0.1 + ((i + 1) * segmentSize);
-            const center = (start + end) / 2;
+              // 1. Remove the 0.1 buffer. Start distributing segments from 0 to 1.
+              const segmentSize = 1 / NARRATIVE_DATA.length;
+              
+              // 2. Calculate the center point for this specific item in the scroll track
+              const center = (i * segmentSize) + (segmentSize / 2);
 
-            const textX = useTransform(smoothProgress, [start, center, end], [100, 0, -100]);
-            const textOpacity = useTransform(smoothProgress, [start, center, end], [0, 1, 0]);
-            const imgScale = useTransform(smoothProgress, [start, center, end], [1.1, 1, 1.1]);
+              // 3. Tighten the animation window (Speed Factor)
+              // 0.25 makes the text snap in and out quickly during the first scroll of the item
+              const speedFactor = 0.25; 
+              const animStart = center - (segmentSize * speedFactor);
+              const animEnd = center + (segmentSize * speedFactor);
 
+              // 4. Update the transforms to use these new immediate ranges
+              const textX = useTransform(smoothProgress, [animStart, center, animEnd], [120, 0, -120]);
+              const textOpacity = useTransform(smoothProgress, [animStart, center, animEnd], [0, 1, 0]);
+              
+              // Image scale should be slightly broader than the text to maintain visual stability
+              const imgScale = useTransform(smoothProgress, [center - segmentSize, center, center + segmentSize], [1.1, 1, 1.1]);
             return (
               <div key={item.id} className="relative flex-shrink-0 w-[90vw] h-[80vh] flex items-center justify-center">
                 <div className="relative w-full h-full overflow-hidden border border-white/10 shadow-[0_0_80px_rgba(0,0,0,1)] bg-zinc-950">

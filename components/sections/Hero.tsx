@@ -76,7 +76,7 @@ export const Hero = () => {
             transition={{ duration: 1.8, delay: 1.2, ease: "easeOut" }}
             className="mt-4 md:mt-2 text-xs md:text-sm text-zinc-400 font-medium uppercase"
           >
-            Environmental Intelligence
+            Travel the World Wisely
           </motion.p>
         </div>
       </motion.div>
