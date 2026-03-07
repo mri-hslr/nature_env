@@ -55,7 +55,7 @@ export const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black" />
 
         <div className="relative z-20 text-center px-4 select-none">
-          <div className="flex justify-center overflow-hidden">
+          <div className="flex justify-center ">
             {mainTitle.split("").map((letter, i) => (
               <motion.span
                 key={i}
