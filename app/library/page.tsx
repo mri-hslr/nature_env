@@ -167,10 +167,19 @@ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
 >
 {/* LEFT COLUMN */}
 <div
-
+  className="flex flex-col justify-between py-12 px-4"
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
-  
+<div className="hidden md:flex flex-col justify-between h-full">
+    {NARRATIVE_CONTENT.map((item, idx) => (
+      <div
+        key={item.id}
+        className="text-[8rem] font-black text-black leading-none opacity-20"
+      >
+        {idx + 1}
+      </div>
+    ))}
+  </div>
 </div>
 
 <div

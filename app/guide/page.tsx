@@ -23,6 +23,7 @@ const NARRATIVE_CONTENT = [
   {
     id: "02",
     title: "The ADSTR Ecosystem",
+    text:"The ADSTR ecosystem powers participation within the Blupedia platform by rewarding environmental engagement through blockchain-based tokens. Users earn ADSTR by supporting conservation projects, contributing knowledge, and participating in eco campaigns. Built on Web3 infrastructure, the system records activities transparently on blockchain, creating an incentive-driven ecosystem where community participation, environmental protection, and digital rewards work together to support sustainable conservation efforts.",
     // These points map to the 2-column grid logic in the JSX below
     points: [
       "Create Your Blupedia Account",
@@ -230,10 +231,19 @@ export default function GuidePage() {
           {/* LEFT COLUMN */}
           
           <div
-  
+    className="flex flex-col justify-between py-12 px-4"
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
-  
+<div className="hidden md:flex flex-col justify-between h-full">
+    {NARRATIVE_CONTENT.map((item, idx) => (
+      <div
+        key={item.id}
+        className="text-[8rem] font-black text-black leading-none opacity-20"
+      >
+        {idx + 1}
+      </div>
+    ))}
+  </div>
 </div>
 
 <div

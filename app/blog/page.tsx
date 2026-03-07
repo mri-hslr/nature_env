@@ -10,7 +10,8 @@ const NARRATIVE_CONTENT = [
     title: "When does an app become Web3?",
     text: "Short answer: 👉 An app becomes Web3 the moment user value is cryptographically owned, not when money is paid.",
     image: "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=2000"
-  }
+  },
+
 ];
 
 export default function BlogPage() {
@@ -67,10 +68,19 @@ export default function BlogPage() {
   }}
 >
 <div
-  
+    className="flex flex-col justify-between py-12 px-4"
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
-  
+<div className="hidden md:flex flex-col justify-between h-full">
+    {NARRATIVE_CONTENT.map((item, idx) => (
+      <div
+        key={item.id}
+        className="text-[8rem] font-black text-black leading-none opacity-20"
+      >
+        {idx + 1}
+      </div>
+    ))}
+  </div>
 </div>
 <div
   className="py-32 px-8 space-y-[60vh]"
