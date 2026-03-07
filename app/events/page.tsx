@@ -7,22 +7,22 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 const NARRATIVE_CONTENT = [
   {
     id: "01",
-    title: "Global Summit",
-    text: "Convening the world's leading environmental architects to synchronize on climate intelligence protocols and decentralized action.",
+    title: "Blupedia Short Film & Social Media Reel Contest at IFFI Goa",
+    //text: "Convening the world's leading environmental architects to synchronize on climate intelligence protocols and decentralized action.",
     image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=2000",
     overlay: "rgba(76, 29, 149, 0.4)" // Deep Violet Tint
   },
   {
     id: "02",
-    title: "Field Intelligence",
-    text: "Live monitoring sessions from the Dehradun node, showcasing real-time data harvesting and indigenous collaboration.",
+    title: "Celebrating Nature, Tourism & Indigenous Art through Cinema and Digital Storytelling",
+    //text: "Live monitoring sessions from the Dehradun node, showcasing real-time data harvesting and indigenous collaboration.",
     image: "https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&q=80&w=2000",
     
   },
   {
     id: "03",
-    title: "The Aftermath",
-    text: "Documenting the long-term resonance of our interventions and the growing strength of the 10x network nodes.",
+    title: "Themes for Participation",
+    text: "“Rebuilding the Ocean” – Creating artificial coral reefs and marine sanctuaries to revive underwater ecosystems. “Green Trails of India” – Documenting eco-friendly travel and nature-based tourism experiences.“Hands of Heritage” – Promoting indigenous handicraft traditions and local artisans through creative storytelling.The Plastic-Free Pledge – Real stories of communities that have successfully reduced plastic use.Green Trails of India” – Documenting eco-friendly travel and nature-based tourism experiences.“Voices of the Forest” – Narratives from tribal or rural communities living in harmony with nature.",
     image: "https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80&w=2000"
   }
 ];
@@ -86,19 +86,10 @@ export default function EventsPage() {
 >
           {/* LEFT COLUMN */}
           <div
-  className="flex flex-col justify-between py-12 px-4"
+  
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
-  <div className="hidden md:flex flex-col justify-between h-full">
-    {NARRATIVE_CONTENT.map((item, idx) => (
-      <div
-        key={`${item.id}-${idx}`}
-        className="text-[8rem] font-black text-black leading-none opacity-20"
-      >
-        {idx + 1}
-      </div>
-    ))}
-  </div>
+
 </div>
 
 <div
@@ -116,7 +107,7 @@ export default function EventsPage() {
         Event // {item.id}
       </p>
 
-      <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-black uppercase mb-8">
+      <h2 className="text-3xl md:text-2xl font-black tracking-tighter text-black uppercase mb-8">
         {item.title}
       </h2>
 

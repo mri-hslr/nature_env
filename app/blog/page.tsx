@@ -7,21 +7,9 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 const NARRATIVE_CONTENT = [
   {
     id: "intro",
-    title: "The Genesis",
-    text: "Our journey began with a simple observation of the shifting tides in the Pacific. We realized that environmental intelligence wasn't just about data; it was about narrative flow.",
+    title: "When does an app become Web3?",
+    text: "Short answer: 👉 An app becomes Web3 the moment user value is cryptographically owned, not when money is paid.",
     image: "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=2000"
-  },
-  {
-    id: "system",
-    title:"10x Architecture",
-    text: "The infrastructure we've built allows for real-time satellite analysis. By bridging the gap between AI and raw ecological data, we've created a lens into the planet's pulse.",
-    image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=2000"
-  },
-  {
-    id: "future",
-    title: "Cyan Horizons",
-    text: "Looking forward, the horizon is clear. We are expanding the node network to Dehradun and beyond, ensuring that every shift in the climate is documented and understood.",
-    image: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=2000"
   }
 ];
 
@@ -79,19 +67,10 @@ export default function BlogPage() {
   }}
 >
 <div
-  className="flex flex-col justify-between py-12 px-4"
+  
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
-  <div className="hidden md:flex flex-col justify-between h-full">
-    {NARRATIVE_CONTENT.map((item, idx) => (
-      <div
-        key={item.id}
-        className="text-[8rem] font-black text-black leading-none opacity-20"
-      >
-        {idx + 1}
-      </div>
-    ))}
-  </div>
+  
 </div>
 <div
   className="py-32 px-8 space-y-[60vh]"
@@ -105,7 +84,7 @@ export default function BlogPage() {
       viewport={{ amount: 0.5 }}
     >
       <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
-        The Project
+       Rajat Mukherjee
       </p>
 
       <h3 className="text-4xl md:text-5xl font-black tracking-tighter text-black uppercase mb-8">

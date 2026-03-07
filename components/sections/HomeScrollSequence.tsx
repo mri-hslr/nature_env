@@ -50,12 +50,11 @@ export const HomeScrollSequence = () => {
         >
           <span className="text-white/80 font-mono text-sm mb-4 block tracking-widest">01.</span>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-          Bluepedia’s Mission: Saving the Blue Ocean<br /> 
+          Introduction to Blupedia Ecosystem<br /> 
             
           </h2>
           <h3>
-             The world’s ocean provides many important benefits to humans and the planet. It produces more than half of the oxygen we breathe and absorbs large amounts of carbon dioxide, helping keep our air balanced. The ocean also regulates the Earth’s climate by moving heat from the equator to the poles. It supports transportation and global trade, as many goods are shipped across the sea. In addition, the ocean provides food, medicine, recreation, and strong economic benefits for millions of people around the world
-              </h3><br /> 
+          Blupedia is a Web3-powered environmental platform combining blockchain, NFTs, and carbon finance to protect forests and biodiversity. Users participate through digital ownership, ecological contributions, and token incentives. The ecosystem connects conservation, decentralized finance, and community participation to transform environmental protection into a transparent, scalable, and reward-driven global movement.              </h3><br /> 
         </motion.div>
       </section>
 
