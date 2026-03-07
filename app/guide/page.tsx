@@ -81,7 +81,7 @@ promoting sustainability, digital engagement, and environmental awareness.
     image: "g2.avif"
   },
   {
-    id: "04",
+    id: "05",
     title: "3. Sindugarh Forest Fractional Ownership (NFTs)",
     text: (
       <div>
@@ -96,7 +96,7 @@ conscious investors and contributors.
     image: "g3.avif",
   },
   {
-    id: "05",
+    id: "06",
     title: "4. Web3 Layer and Blockchain Infrastructure     ",
     text: (
       <div>
@@ -112,7 +112,7 @@ environmental impact is verifiable and immutable.
     image: "g4.avif",
   },
   {
-  id: "06",
+  id: "07",
     title: "5.⁠Carbon Credit Marketplace     ",
     text: (
       <div>
@@ -128,7 +128,7 @@ action and sustainable environmental finance.
     image: "g5.avif",
   },
   {
-    id: "07",
+    id: "08",
       title: "6. ⁠NFT-Based Environmental Assets       ",
       text: (
         <div>
@@ -144,7 +144,7 @@ initiatives.
       image: "g6.avif",
   },
   {
-    id: "08",
+    id: "09",
       title: "7. Community Participation and Eco-Governance       ",
       text: (
         <div>
@@ -160,7 +160,7 @@ incentives with ecological preservation.
       image: "g7.avif",
   },
   {
-    id: "09",
+    id: "10",
       title: " 8.⁠ ⁠Sustainable Digital Economy       ",
       text: (
         <div>
@@ -178,7 +178,7 @@ natural ecosystems.
   },
   
   {
-    id: "10",
+    id: "11",
       title: " 8.⁠ ⁠Sustainable Digital Economy       ",
       text: (
         <div>
@@ -221,74 +221,116 @@ export default function GuidePage() {
           </h1>
         </section>
 
-        <section className="relative flex flex-col md:flex-row w-full">
+        <section
+  className="relative grid min-h-screen"
+  style={{
+    gridTemplateColumns: "10% 30% 20% 20% 20%",
+  }}
+>
           {/* LEFT COLUMN */}
-          <div className="w-full md:w-1/2 px-6 md:px-12 py-32 space-y-[60vh]">
-            {NARRATIVE_CONTENT.map((item, idx) => (
-              <motion.div
-                key={idx}
-                className="max-w-xl"
-                onViewportEnter={() => setActiveIndex(idx)}
-                viewport={{ amount: 0.5 }}
-              >
-                <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
-                  Protocol // {item.id}
-                </p>
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black uppercase mb-8">
-                  {item.title}
-                </h2>
-                
-                {item.id !== "02" && (
-                  <div className="text-xl md:text-2xl font-medium leading-relaxed text-black/80">
-                    {item.text}
-                  </div>
-                )}
-              </motion.div>
-            ))}
-            <div className="h-[40vh]" />
-          </div>
+          
+          <div
+  className="flex flex-col justify-between py-12 px-4"
+  style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
+>
+  <div className="hidden md:flex flex-col justify-between h-full">
+    {NARRATIVE_CONTENT.map((item, idx) => (
+      <div
+        key={item.id}
+        className="text-[8rem] font-black text-black leading-none opacity-20"
+      >
+        {idx + 1}
+      </div>
+    ))}
+  </div>
+</div>
 
-          {/* RIGHT PINNED COLUMN */}
-          <div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden">
-            <div className="relative w-full h-full flex items-center justify-center">
-              <AnimatePresence mode="wait">
-                {NARRATIVE_CONTENT[activeIndex].id === "02" ? (
-                  <motion.div
-                    key="points-grid"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -20 }}
-                    className="absolute inset-0 flex items-center justify-center z-50 px-12"
-                  >
-                    <div className="grid grid-cols-2 gap-x-8 gap-y-10 w-full max-w-6xl"> 
-                      {NARRATIVE_CONTENT[1].points?.map((point, i) => (
-                        <div key={i} className="flex flex-col space-y-2 border-l border-black/10 pl-9">
-                          <span className="text-xs font-bold text-black/40">
-                            {i < 9 ? `0${i + 1}` : i + 1}
-                          </span>
-                          <h3 className="text-xl md:text-1xl lg:text-2xl font-black text-black uppercase leading-tight tracking-tighter">
-                            {point}
-                          </h3>
-                        </div>
-                      ))}
-                    </div>
-                  </motion.div>
-                ) : (
-                  <motion.img
-                    key={activeIndex}
-                    src={NARRATIVE_CONTENT[activeIndex].image as string}
-                    initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-                    animate={{ opacity: 0.8, scale: 1, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                    className="w-full h-full object-cover"
-                    alt="Guide Operational Visual"
-                  />
-                )}
-              </AnimatePresence>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
-            </div>
+<div
+  className="py-32 px-8 space-y-[60vh]"
+  style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
+>
+  {NARRATIVE_CONTENT.map((item, idx) => (
+    <motion.div
+      key={idx}
+      className="max-w-xl"
+      onViewportEnter={() => setActiveIndex(idx)}
+      viewport={{ amount: 0.5 }}
+    >
+      <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
+        Protocol // {item.id}
+      </p>
+
+      <h2 className="text-4xl md:text67xl font-black tracking-tighter text-black uppercase mb-8">
+        {item.title}
+      </h2>
+
+      {item.id !== "02" && (
+        <div className="text-xl md:text-1xl font-medium leading-relaxed text-black/80">
+          {item.text}
+        </div>
+      )}
+    </motion.div>
+  ))}
+
+  <div className="h-[40vh]" />
+</div>
+
+<div style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }} />
+
+<div
+  className="hidden md:block sticky top-0 overflow-hidden"
+  style={{
+    gridColumn: "4 / span 2",
+    height: "100vh",
+  }}
+>
+  <div className="relative w-full h-full flex items-center justify-center">
+
+    <AnimatePresence mode="wait">
+      {NARRATIVE_CONTENT[activeIndex].id === "02" ? (
+        <motion.div
+          key="points-grid"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: -20 }}
+          className="absolute inset-0 flex items-center justify-center z-50 px-12"
+        >
+          <div className="grid grid-cols-2 gap-x-8 gap-y-10 w-full max-w-6xl">
+            {NARRATIVE_CONTENT[1].points?.map((point, i) => (
+              <div key={i} className="flex flex-col space-y-2 border-l border-black/10 pl-9">
+                <span className="text-xs font-bold text-black/40">
+                  {i < 9 ? `0${i + 1}` : i + 1}
+                </span>
+                <h3 className="text-xl md:text-1xl lg:text-2xl font-black text-black uppercase leading-tight tracking-tighter">
+                  {point}
+                </h3>
+              </div>
+            ))}
           </div>
+        </motion.div>
+      ) : (
+        <motion.img
+          key={activeIndex}
+          src={NARRATIVE_CONTENT[activeIndex].image as string}
+          initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+          animate={{ opacity: 0.8, scale: 1, filter: "blur(0px)" }}
+          exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            display: "block",
+          }}
+          alt="Guide Operational Visual"
+        />
+      )}
+    </AnimatePresence>
+
+    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-black/40 pointer-events-none" />
+
+  </div>
+</div>
         </section>
 
         <section className="h-screen flex items-center justify-center border-t border-black/10">
