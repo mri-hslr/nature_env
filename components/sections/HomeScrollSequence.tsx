@@ -50,9 +50,12 @@ export const HomeScrollSequence = () => {
         >
           <span className="text-white/80 font-mono text-sm mb-4 block tracking-widest">01.</span>
           <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-white uppercase leading-[0.9]">
-            DRONE AND NORMAL VISUALS FROM <br /> 
-             SINDU FOREST<br /> 
+          Bluepedia’s Mission: Saving the Blue Ocean<br /> 
+            
           </h2>
+          <h3>
+             The world’s ocean provides many important benefits to humans and the planet. It produces more than half of the oxygen we breathe and absorbs large amounts of carbon dioxide, helping keep our air balanced. The ocean also regulates the Earth’s climate by moving heat from the equator to the poles. It supports transportation and global trade, as many goods are shipped across the sea. In addition, the ocean provides food, medicine, recreation, and strong economic benefits for millions of people around the world
+              </h3><br /> 
         </motion.div>
       </section>
 
@@ -62,7 +65,9 @@ export const HomeScrollSequence = () => {
         className="sticky top-0 z-30 h-screen w-full flex items-center justify-center bg-[#064e3b] will-change-transform shadow-[0_-20px_50px_rgba(0,0,0,0.5)]"
       >
         {/* ✅ ADD THIS LINE: Integrated behind the content layer */}
-  
+        <div className="absolute inset-0 -z-10">
+    <GreenNoiseGridBackground />
+  </div>
         <motion.div 
           style={{ color: monoTextColor }}
           className="relative w-full h-full flex flex-col justify-center px-6 md:px-24 max-w-[1400px]"

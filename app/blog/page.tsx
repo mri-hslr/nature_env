@@ -13,7 +13,7 @@ const NARRATIVE_CONTENT = [
   },
   {
     id: "system",
-    title: "10x Architecture",
+    title:"10x Architecture",
     text: "The infrastructure we've built allows for real-time satellite analysis. By bridging the gap between AI and raw ecological data, we've created a lens into the planet's pulse.",
     image: "https://images.unsplash.com/photo-1505118380757-91f5f5632de0?q=80&w=2000"
   },
@@ -72,60 +72,85 @@ export default function BlogPage() {
           The  <span className="opacity-20 text-black">Project</span>
         </h1>
       </section>
+      <section
+  className="relative grid min-h-screen"
+  style={{
+    gridTemplateColumns: "10% 30% 20% 20% 20%",
+  }}
+>
+<div
+  className="flex flex-col justify-between py-12 px-4"
+  style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
+>
+  <div className="hidden md:flex flex-col justify-between h-full">
+    {NARRATIVE_CONTENT.map((item, idx) => (
+      <div
+        key={item.id}
+        className="text-[8rem] font-black text-black leading-none opacity-20"
+      >
+        {idx + 1}
+      </div>
+    ))}
+  </div>
+</div>
+<div
+  className="py-32 px-8 space-y-[60vh]"
+  style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
+>
+  {NARRATIVE_CONTENT.map((item, idx) => (
+    <motion.div
+      key={item.id}
+      className="max-w-xl"
+      onViewportEnter={() => setActiveIndex(idx)}
+      viewport={{ amount: 0.5 }}
+    >
+      <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
+        The Project
+      </p>
 
-        <section className="relative flex flex-col md:flex-row w-full">
-          <div className="w-full md:w-1/2 px-6 md:px-12 py-32 space-y-[60vh]">
-            {NARRATIVE_CONTENT.map((item, idx) => (
-              <motion.div
-                key={item.id}
-                className="max-w-xl"
-                onViewportEnter={() => setActiveIndex(idx)}
-                viewport={{ amount: 0.5 }}
-              >
-                <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
-                  Section // {item.id}
-                </p>
-                <h2 className="text-5xl md:text-7xl font-black tracking-tighter text-black uppercase mb-8">
-                  {item.title}
-                </h2>
-                <p className="text-xl md:text-2xl font-medium leading-relaxed text-black/80">
-                  {item.text}
-                </p>
-              </motion.div>
-            ))}
-            <div className="h-[40vh]" />
-          </div>
+      <h3 className="text-4xl md:text-5xl font-black tracking-tighter text-black uppercase mb-8">
+        {item.title}
+      </h3>
 
-          {/* RIGHT PINNED COLUMN */}
-<div className="hidden md:block w-1/2 h-screen sticky top-0 overflow-hidden">
-  <div className="relative w-full h-full flex items-center justify-center">
-    <div className="relative w-full h-full overflow-hidden">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={activeIndex}
-                    src={NARRATIVE_CONTENT[activeIndex].image}
-                    initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
-                    animate={{ opacity: 0.8, scale: 1, filter: "blur(0px)" }}
-                    exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
-                    transition={{
-                      duration: 0.7,
-                      ease: [0.22, 1, 0.36, 1],
-                    }}
-                    className="w-full h-full object-cover"
-                    alt="Narrative Visual"
-                  />
-                </AnimatePresence>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </div>
-          </div>
-        </section>
+      <p className="text-base md:text-lg font-medium leading-relaxed text-black/80 mb-10">
+        {item.text}
+      </p>
+    </motion.div>
+  ))}
 
-        <section className="h-screen flex items-center justify-center border-t border-black/10">
-          <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase text-black opacity-10">
-            Observation is the catalyst
-          </h2>
-        </section>
+  <div className="h-[40vh]" />
+</div>
+<div style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }} />
+<div
+  className="hidden md:block sticky top-0 overflow-hidden"
+  style={{
+    gridColumn: "4 / span 2",
+    height: "100vh",
+  }}
+>
+  <div style={{ position: "relative", width: "100%", height: "100%" }}>
+    <AnimatePresence mode="wait">
+      <motion.img
+        key={activeIndex}
+        src={NARRATIVE_CONTENT[activeIndex].image}
+        initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
+        animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+        exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block",
+          filter: "grayscale(100%)",
+        }}
+        alt="Narrative Visual"
+      />
+    </AnimatePresence>
+  </div>
+</div>
+
+</section>
       </div>
     </motion.main>
   );

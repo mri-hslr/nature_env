@@ -75,10 +75,16 @@ export const ReflectiveOutro = () => {
           }}
           className="text-5xl md:text-7xl font-medium text-white tracking-tight leading-[1.1] mb-16"
         >
-          Nature does not require our permission to thrive. It requires our 
-          <span className="italic font-serif ml-4 text-[#4ade80] drop-shadow-[0_0_15px_rgba(74,222,128,0.3)]">silence.</span>
+         Future Vision of Blupedia          
         </motion.h2>
-
+        <motion.span style={{opacity}} className="text-[#4ade80] font-mono" >
+        <p>Blupedia envisions a global Web3 ecosystem where forests, biodiversity, and natural 
+resources are digitally protected through blockchain ownership and community participation. 
+By integrating NFTs, carbon credits, and decentralized governance, the platform aims to 
+build a transparent environmental economy that rewards individuals and organizations for 
+protecting nature.</p>
+        </motion.span>
+        
         <motion.div 
           style={{ opacity }}
           className="flex flex-col items-center gap-8"

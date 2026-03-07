@@ -4,8 +4,9 @@ import React from "react";
 import { motion, Variants } from "framer-motion";
 import { NetworkBackground } from "@/components/ui/network-background";
 import { EvervaultCard } from "@/components/ui/evervault-card";
-import { Meteors } from "@/components/ui/meteors";
 
+import { OceanMissionSection } from "@/components/sections/OceanMissionSection";
+import { SkewedRectanglesBackground } from "@/components/ui/SkewedRectanglesBackground";
 const corePillars = [
   { id: 1, text: "Mittal Maurya", color: "#7dd3fc", img: "c1.jpeg" },
   { id: 2, text: "Anjay Anil", color: "#10b981", img: "c2.avif" },
@@ -17,7 +18,7 @@ const corePillars = [
   { id: 8, text: "Mercy", color: "#f43f5e", img: "c8.avif" },
   { id: 9, text: "Arya", color: "#0ea5e9", img: "c9.avif" },
   { id: 10, text: "(Nikki) Paarbati Tamang", color: "#8b5cf6", img: "c10.avif" },
-  { id: 5, text: "Divyanshi Mishra", color: "#0ea5e9", img: "c11.avif" },
+  { id: 11, text: "Divyanshi Mishra", color: "#0ea5e9", img: "c11.avif" },
 ];
 
 export default function AboutPage() {
@@ -31,14 +32,13 @@ export default function AboutPage() {
   };
 
   return (
-    <main className="relative min-h-screen bg-black overflow-x-hidden">
+    <main className="relative min-h-screen bg-black overflow-x-hidden scroll-smooth">
       {/* BACKGROUND LAYERS */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-       
+      
         {/* We add a container for meteors to cover the full viewport */}
-        <div className="absolute inset-0 overflow-hidden">
-           <Meteors number={40} />
-        </div>
+       
+       
       </div>
 
       <div className="relative z-10 pt-20">
@@ -59,7 +59,7 @@ export default function AboutPage() {
             animate="visible"
             className="max-w-4xl text-2xl md:text-3xl text-[#bae6fd] font-light leading-relaxed border-l-4 border-[#7dd3fc] pl-8"
           >
-            A revolutionary platform focused on building a sustainable, nature-conscious community led by Mittal Maurya, with co-Founder Anjay Anil.
+            This Section introduces Blupedia, a revolutionary platform focused on building a sustainable, nature-conscious community led by Mittal Maurya, with co-Founder Anjay Anil. It combines eco-tourism, conservation, and indigenous empowerment into a single mission-driven vision.
           </motion.p>
         </div>
 
@@ -84,48 +84,21 @@ export default function AboutPage() {
             </motion.div>
           ))}
         </div>
+        <section className="relative w-full h-auto bg-black overflow-hidden">
+          <OceanMissionSection />
+        </section>
+        {/* GLOBAL CSS INJECTION TO HIDE SCROLLBARS ON WINDOWS/CHROME */}
+      <style jsx global>{`
+        .no-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
 
-        {/* --- SECTION 3: THE BLUEPRINT ECOSYSTEM --- */}
-        <div className="px-6 md:px-20 pb-40 space-y-32">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-20">
-            <motion.div custom={2} variants={fadeInText} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <h3 className="text-cyan-400 font-mono text-sm tracking-[0.3em] uppercase mb-4">The Mission</h3>
-              <p className="text-2xl text-white/90 font-medium leading-relaxed">
-                To build a sustainable, conscious community that empowers eco-tourism and indigenous livelihoods, creating global action through grassroots participation and digital innovation.
-              </p>
-            </motion.div>
-            <motion.div custom={3} variants={fadeInText} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-              <h3 className="text-cyan-400 font-mono text-sm tracking-[0.3em] uppercase mb-4">The Vision</h3>
-              <p className="text-2xl text-white/90 font-medium leading-relaxed">
-                Not just a brand—a people-powered movement redefining branding by shifting focus from products to people, enabling members to co-create value for the planet.
-              </p>
-            </motion.div>
-          </div>
-
-          <div className="max-w-5xl space-y-12">
-            <motion.h2 
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter"
-            >
-              The Blueprint
-            </motion.h2>
-            
-            <div className="space-y-8 text-xl md:text-2xl text-white/70 leading-relaxed font-light">
-              <motion.p custom={4} variants={fadeInText} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                Blupedia is best understood as a living, breathing ecosystem rather than a conventional company. At its heart lies the conviction that sustainable transformation is impossible without active citizen participation.
-              </motion.p>
-              
-              <motion.p custom={5} variants={fadeInText} initial="hidden" whileInView="visible" viewport={{ once: true }}>
-                In practical terms, every individual who signs up acts as a micro-node in a much larger network. Each node produces energy in the form of knowledge, storytelling, or direct environmental intervention.
-              </motion.p>
-
-              <motion.p custom={6} variants={fadeInText} initial="hidden" whileInView="visible" viewport={{ once: true }} className="text-[#7dd3fc] font-medium italic">
-                "Blupedia functions similarly to a coral reef: countless organisms interlocking to create a resilient super-structure that neither top-down funding nor isolated activism could replicate."
-              </motion.p>
-            </div>
-          </div>
-        </div>
+        
       </div>
     </main>
   );
