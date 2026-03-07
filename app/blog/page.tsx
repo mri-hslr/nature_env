@@ -71,7 +71,7 @@ export default function BlogPage() {
     className="flex flex-col justify-between py-12 px-4"
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
-<div className="hidden md:flex flex-col justify-between h-full">
+<div className="hidden md:flex flex-col space-y-[60vh] pt-32">
     {NARRATIVE_CONTENT.map((item, idx) => (
       <div
         key={item.id}
