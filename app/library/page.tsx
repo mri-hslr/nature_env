@@ -167,7 +167,7 @@ backgroundImage: `url('https://grainy-gradients.vercel.app/noise.svg')`,
 >
 {/* LEFT COLUMN */}
 <div
-  className="flex flex-col justify-between py-12 px-4"
+  className="flex flex-col justify-between py-32 px-4"
   style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
 >
 <div className="hidden md:flex flex-col space-y-[60vh] pt-32">
