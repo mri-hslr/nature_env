@@ -23,6 +23,7 @@ const NARRATIVE_CONTENT = [
   {
     id: "02",
     title: "The ADSTR Ecosystem",
+    
     // These points map to the 2-column grid logic in the JSX below
     points: [
       "Create Your Blupedia Account",
@@ -179,7 +180,7 @@ natural ecosystems.
   
   {
     id: "11",
-      title: " 8.⁠ ⁠Sustainable Digital Economy       ",
+      title: " 9.⁠ ⁠⁠Environmental Data and Knowledge Hub      ",
       text: (
         <div>
           <p className="font-bold mb-4 uppercase tracking-wider text-black"> We expect you to:</p>
