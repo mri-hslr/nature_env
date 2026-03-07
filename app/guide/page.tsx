@@ -23,7 +23,11 @@ const NARRATIVE_CONTENT = [
   {
     id: "02",
     title: "The ADSTR Ecosystem",
+<<<<<<< HEAD
     text:"The ADSTR ecosystem powers participation within the Blupedia platform by rewarding environmental engagement through blockchain-based tokens. Users earn ADSTR by supporting conservation projects, contributing knowledge, and participating in eco campaigns. Built on Web3 infrastructure, the system records activities transparently on blockchain, creating an incentive-driven ecosystem where community participation, environmental protection, and digital rewards work together to support sustainable conservation efforts.",
+=======
+    
+>>>>>>> 12b3830a83621436b477235b40aab5be8d44b0af
     // These points map to the 2-column grid logic in the JSX below
     points: [
       "Create Your Blupedia Account",
@@ -180,7 +184,7 @@ natural ecosystems.
   
   {
     id: "11",
-      title: " 8.⁠ ⁠Sustainable Digital Economy       ",
+      title: " 9.⁠ ⁠⁠Environmental Data and Knowledge Hub      ",
       text: (
         <div>
           <p className="font-bold mb-4 uppercase tracking-wider text-black"> We expect you to:</p>
