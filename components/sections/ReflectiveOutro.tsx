@@ -12,6 +12,7 @@ export const ReflectiveOutro = () => {
   });
 
   const pathLength = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
+  // Opacity transform preserved for the central content only
   const opacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
 
   return (
@@ -19,12 +20,11 @@ export const ReflectiveOutro = () => {
       ref={containerRef} 
       className="relative h-[150vh] w-full flex flex-col items-center justify-center overflow-hidden"
       style={{
-        // A rich, luminous gradient instead of flat black
         background: "radial-gradient(circle at center, #062d24 0%, #02110e 100%)"
       }}
     >
       
-      {/* AMBIENT GENERATIVE BACKGROUND - Enhanced with Glow */}
+      {/* AMBIENT GENERATIVE BACKGROUND */}
       <svg
         viewBox="0 0 1000 1000"
         className="absolute inset-0 w-full h-full opacity-30 pointer-events-none"
@@ -41,7 +41,7 @@ export const ReflectiveOutro = () => {
         <motion.path
           d="M100,500 C150,300 350,100 500,100 C650,100 850,300 900,500 C850,700 650,900 500,900 C350,900 150,700 100,500"
           fill="none"
-          stroke="#4ade80" // Lighter Mint/Green
+          stroke="#4ade80"
           strokeWidth="0.8"
           filter="url(#glow)"
           style={{ pathLength }}
@@ -59,7 +59,7 @@ export const ReflectiveOutro = () => {
         />
       </svg>
 
-      {/* FINAL TYPOGRAPHY - Cleaned up JSX */}
+      {/* FINAL TYPOGRAPHY */}
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <motion.span 
           style={{ opacity }}
@@ -77,13 +77,16 @@ export const ReflectiveOutro = () => {
         >
          Future Vision of Blupedia          
         </motion.h2>
-        <motion.span style={{opacity}} className="text-[#4ade80] font-mono" >
-        <p>Blupedia envisions a global Web3 ecosystem where forests, biodiversity, and natural 
-resources are digitally protected through blockchain ownership and community participation. 
-By integrating NFTs, carbon credits, and decentralized governance, the platform aims to 
-build a transparent environmental economy that rewards individuals and organizations for 
-protecting nature.</p>
-        </motion.span>
+        
+        <motion.div style={{ opacity }} className="text-[#4ade80] font-mono mb-16" >
+          <p className="leading-relaxed">
+            Blupedia envisions a global Web3 ecosystem where forests, biodiversity, and natural 
+            resources are digitally protected through blockchain ownership and community participation. 
+            By integrating NFTs, carbon credits, and decentralized governance, the platform aims to 
+            build a transparent environmental economy that rewards individuals and organizations for 
+            protecting nature.
+          </p>
+        </motion.div>
         
         <motion.div 
           style={{ opacity }}
@@ -99,13 +102,13 @@ protecting nature.</p>
         </motion.div>
       </div>
 
-      {/* FOOTER - Brightened for readability */}
-      <div className="absolute bottom-12 left-0 w-full px-12 flex justify-between items-end opacity-60">
-        <div className="text-[9px] font-mono text-[#4ade80] flex flex-col gap-1 tracking-widest">
+      {/* FOOTER - Updated to White, persistent, and larger text */}
+      <div className="absolute bottom-12 left-0 w-full px-12 flex justify-between items-end">
+        <div className="text-[11px] font-mono text-white flex flex-col gap-1 tracking-widest font-medium opacity-80">
           <span>COORDINATES // 78.2232 N</span>
           <span>STATION // SVALBARD GLOBAL</span>
         </div>
-        <div className="text-[9px] font-mono text-[#4ade80] tracking-widest uppercase">
+        <div className="text-[11px] font-mono text-white tracking-widest uppercase font-medium opacity-80">
           © 2026 Nature Intelligence System
         </div>
       </div>
