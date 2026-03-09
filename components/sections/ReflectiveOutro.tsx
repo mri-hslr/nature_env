@@ -12,8 +12,8 @@ export const ReflectiveOutro = () => {
   });
 
   const pathLength = useTransform(scrollYProgress, [0, 0.8], [0, 1]);
-  // Opacity transform preserved for the central content only
-  const opacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
+  // Opacity transform strictly for central content to avoid footer interference
+  const contentOpacity = useTransform(scrollYProgress, [0.7, 0.9], [0, 1]);
 
   return (
     <div 
@@ -62,7 +62,7 @@ export const ReflectiveOutro = () => {
       {/* FINAL TYPOGRAPHY */}
       <div className="relative z-10 text-center px-6 max-w-4xl">
         <motion.span 
-          style={{ opacity }}
+          style={{ opacity: contentOpacity }}
           className="text-[#4ade80] font-mono text-[10px] tracking-[0.6em] uppercase mb-12 block font-bold"
         >
           System Evolution Complete
@@ -70,7 +70,7 @@ export const ReflectiveOutro = () => {
         
         <motion.h2 
           style={{ 
-            opacity,
+            opacity: contentOpacity,
             y: useTransform(scrollYProgress, [0.7, 1], [30, 0])
           }}
           className="text-5xl md:text-7xl font-medium text-white tracking-tight leading-[1.1] mb-16"
@@ -78,7 +78,7 @@ export const ReflectiveOutro = () => {
          Future Vision of Blupedia          
         </motion.h2>
         
-        <motion.div style={{ opacity }} className="text-[#4ade80] font-mono mb-16" >
+        <motion.div style={{ opacity: contentOpacity }} className="text-[#00000] font-mono mb-16" >
           <p className="leading-relaxed">
             Blupedia envisions a global Web3 ecosystem where forests, biodiversity, and natural 
             resources are digitally protected through blockchain ownership and community participation. 
@@ -89,7 +89,7 @@ export const ReflectiveOutro = () => {
         </motion.div>
         
         <motion.div 
-          style={{ opacity }}
+          style={{ opacity: contentOpacity }}
           className="flex flex-col items-center gap-8"
         >
           <div className="h-px w-48 bg-gradient-to-r from-transparent via-[#4ade80]/50 to-transparent" />
@@ -102,14 +102,17 @@ export const ReflectiveOutro = () => {
         </motion.div>
       </div>
 
-      {/* FOOTER - Updated to White, persistent, and larger text */}
-      <div className="absolute bottom-12 left-0 w-full px-12 flex justify-between items-end">
-        <div className="text-[11px] font-mono text-white flex flex-col gap-1 tracking-widest font-medium opacity-80">
-          <span>COORDINATES // 78.2232 N</span>
-          <span>STATION // SVALBARD GLOBAL</span>
+      {/* FOOTER - FIXED: PURE WHITE, LARGER TEXT, NO FADE/DISAPPEARANCE */}
+     {/* ... rest of the component above ... */}
+
+      {/* FOOTER - FIXED: PURE WHITE, LARGER TEXT, NO FADE/DISAPPEARANCE */}
+      <div className="absolute bottom-12 left-0 w-full px-12 flex justify-between items-end z-50">
+        <div className="text-[14px] font-mono text-white flex flex-col gap-1 tracking-widest font-bold">
+          <span className="drop-shadow-md">COORDINATES // 78.2232 N</span>
+          <span className="drop-shadow-md">STATION // SVALBARD GLOBAL</span>
         </div>
-        <div className="text-[11px] font-mono text-white tracking-widest uppercase font-medium opacity-80">
-          © 2026 Nature Intelligence System
+        <div className="text-[14px] font-mono text-white tracking-widest uppercase font-bold">
+          <span className="drop-shadow-md">© 2026 Nature Intelligence System</span>
         </div>
       </div>
     </div>
