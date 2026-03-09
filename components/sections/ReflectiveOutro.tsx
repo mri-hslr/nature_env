@@ -59,27 +59,27 @@ export const ReflectiveOutro = () => {
         />
       </svg>
 
-      {/* FINAL TYPOGRAPHY */}
-      <div className="relative z-10 text-center px-6 max-w-4xl">
+      {/* FINAL TYPOGRAPHY - Persistent, Large, and White */}
+      <div className="relative z-10 text-center px-6 max-w-5xl">
         <motion.span 
-          style={{ opacity: contentOpacity }}
+          /* Removed scroll-linked opacity */
           className="text-[#4ade80] font-mono text-[10px] tracking-[0.6em] uppercase mb-12 block font-bold"
         >
           System Evolution Complete
         </motion.span>
         
         <motion.h2 
-          style={{ 
-            opacity: contentOpacity,
-            y: useTransform(scrollYProgress, [0.7, 1], [30, 0])
-          }}
-          className="text-5xl md:text-7xl font-medium text-white tracking-tight leading-[1.1] mb-16"
+          /* Removed opacity and y-transform motion */
+          className="text-6xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none mb-16"
         >
-         Future Vision of Blupedia          
+         Future Vision of <br /> <span className="text-transparent" style={{ WebkitTextStroke: "1.5px rgba(255,255,255,0.4)" }}>Blupedia</span>          
         </motion.h2>
         
-        <motion.div style={{ opacity: contentOpacity }} className="text-[#00000] font-mono mb-16" >
-          <p className="leading-relaxed">
+        <motion.div 
+          /* Removed scroll-linked opacity and updated color/size */
+          className="text-white font-mono mb-16" 
+        >
+          <p className="text-xl md:text-2xl leading-relaxed font-medium max-w-4xl mx-auto">
             Blupedia envisions a global Web3 ecosystem where forests, biodiversity, and natural 
             resources are digitally protected through blockchain ownership and community participation. 
             By integrating NFTs, carbon credits, and decentralized governance, the platform aims to 
@@ -89,7 +89,6 @@ export const ReflectiveOutro = () => {
         </motion.div>
         
         <motion.div 
-          style={{ opacity: contentOpacity }}
           className="flex flex-col items-center gap-8"
         >
           <div className="h-px w-48 bg-gradient-to-r from-transparent via-[#4ade80]/50 to-transparent" />
