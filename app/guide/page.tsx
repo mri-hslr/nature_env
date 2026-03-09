@@ -41,7 +41,7 @@ const NARRATIVE_CONTENT = [
   },
   {
     id: "03",
-    title: "Step 1: Onboarding",
+    title: " Onboarding",
     text: (
       <div>
         <p className="font-bold mb-4 uppercase tracking-wider text-black">Getting started is simple:</p>
@@ -65,7 +65,7 @@ const NARRATIVE_CONTENT = [
   },
   {
     id: "04",
-    title: " 2.⁠ ⁠Earn ADSTR Tokens  ",
+    title: " ⁠Earn ADSTR Tokens  ",
     text: (
       <div>
         <p className="font-bold mb-4 uppercase tracking-wider text-black">ADSTR Points are Blupedia’s reward units.You earn ADSTR points when you:</p>
@@ -83,7 +83,7 @@ promoting sustainability, digital engagement, and environmental awareness.
   },
   {
     id: "05",
-    title: "3. Sindugarh Forest Fractional Ownership (NFTs)",
+    title: " Sindugarh Forest Fractional Ownership (NFTs)",
     text: (
       <div>
         <p className="font-bold mb-4 uppercase tracking-wider text-black">Visit the Blupedia Online Store.You’ll find:</p>
@@ -98,7 +98,7 @@ conscious investors and contributors.
   },
   {
     id: "06",
-    title: "4. Web3 Layer and Blockchain Infrastructure     ",
+    title: " Web3 Layer and Blockchain Infrastructure     ",
     text: (
       <div>
         <p className="font-bold mb-4 uppercase tracking-wider text-black">Blupedia runs verified environmental programs such as:</p>
@@ -114,7 +114,7 @@ environmental impact is verifiable and immutable.
   },
   {
   id: "07",
-    title: "5.⁠Carbon Credit Marketplace     ",
+    title: "⁠Carbon Credit Marketplace     ",
     text: (
       <div>
         <p className="font-bold mb-4 uppercase tracking-wider text-black">Blupedia rewards meaningful content, not spam.You can post:</p>
@@ -130,7 +130,7 @@ action and sustainable environmental finance.
   },
   {
     id: "08",
-      title: "6. ⁠NFT-Based Environmental Assets       ",
+      title: " ⁠NFT-Based Environmental Assets       ",
       text: (
         <div>
           <p className="font-bold mb-4 uppercase tracking-wider text-black">Blupedia offers</p>
@@ -146,7 +146,7 @@ initiatives.
   },
   {
     id: "09",
-      title: "7. Community Participation and Eco-Governance       ",
+      title: " Community Participation and Eco-Governance       ",
       text: (
         <div>
           <p className="font-bold mb-4 uppercase tracking-wider text-black">Your Blupedia Dashboard shows:</p>
@@ -162,7 +162,7 @@ incentives with ecological preservation.
   },
   {
     id: "10",
-      title: " 8.⁠ ⁠Sustainable Digital Economy       ",
+      title: " ⁠ ⁠Sustainable Digital Economy       ",
       text: (
         <div>
           <p className="font-bold mb-4 uppercase tracking-wider text-black"> After you own an NFT:</p>
@@ -180,7 +180,7 @@ natural ecosystems.
   
   {
     id: "11",
-      title: " 8.⁠ ⁠Sustainable Digital Economy       ",
+      title: " ⁠ Your Role in the Blupedia Community     ",
       text: (
         <div>
           <p className="font-bold mb-4 uppercase tracking-wider text-black"> We expect you to:</p>
@@ -257,6 +257,21 @@ export default function GuidePage() {
           <p className="text-xl md:text-xl font-medium leading-relaxed text-black/80">
             {item.text}
           </p>
+          {/* PLACE BUTTON HERE */}
+<motion.div className="mt-10" initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.2 }}>
+  <button 
+    onClick={() => {}} // Keep empty for now as requested
+    className="group relative flex items-center gap-4 overflow-hidden border border-black/10 px-6 py-3 transition-all duration-500 hover:border-black/40"
+  >
+    <div className="absolute inset-0 z-0 translate-y-full bg-black transition-transform duration-500 group-hover:translate-y-0" />
+    <span className="relative z-10 text-[10px] font-black uppercase tracking-[0.3em] text-black transition-colors duration-500 group-hover:text-white">
+      Know More
+    </span>
+    <svg className="relative z-10 h-3 w-3 -rotate-45 transition-all duration-500 group-hover:rotate-0 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+    </svg>
+  </button>
+</motion.div>
         </div>
       </motion.div>
     ))}
@@ -320,7 +335,7 @@ export default function GuidePage() {
         </section>
 
         <section className="h-screen flex items-center justify-center border-t border-black/10">
-          <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase text-black opacity-10">
+  <h2 className="text-5xl md:text-[10vw] font-black tracking-tighter uppercase leading-none text-white opacity-40 text-center">
             Clarity is the foundation
           </h2>
         </section>

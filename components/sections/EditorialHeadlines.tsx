@@ -8,9 +8,9 @@ interface EditorialProps {
 }
 
 const highlights = [
-  "PROTECTING ENVIORNMENT —",
+  "PROTECTING ENVIRONMENT —",
   "CREATING WEALTH FOR SUBSCRIBERS —",
-  "ENVIORNMENT FRIENDLY TOURISM —"
+  "ENVIRONMENT FRIENDLY TOURISM —"
 ];
 
 export const EditorialHeadlines: React.FC<EditorialProps> = ({ progress }) => {

@@ -238,7 +238,7 @@ export default function FAQPage() {
 
         {/* FOOTER SECTION */}
         <section className="h-screen flex items-center justify-center border-t border-black/10">
-          <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase text-black opacity-10">
+  <h2 className="text-5xl md:text-[10vw] font-black tracking-tighter uppercase leading-none text-white opacity-40 text-center">
             Curiosity is the engine
           </h2>
         </section>

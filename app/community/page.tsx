@@ -76,61 +76,49 @@ export default function CommunityPage() {
         </section>
 
         {/* SPLIT NARRATIVE SECTION */}
-        <section
-          className="relative grid min-h-screen"
-          style={{
-            gridTemplateColumns: "10% 30% 20% 20% 20%",
-          }}
+        {/* SPLIT NARRATIVE SECTION */}
+<section
+  className="relative grid min-h-screen"
+  style={{
+    gridTemplateColumns: "10% 40% 10% 40%", // Simplified grid
+  }}
 >
-          {/* LEFT COLUMN */}
-          <div
-  className="flex flex-col justify-between py-32 px-4"
-  style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
->
-  <div className="hidden md:flex flex-col space-y-[60vh] pt-32">
+  {/* LEFT CONTENT COLUMN (Numbers + Text) */}
+  <div
+    className="col-span-2 py-32 px-8 space-y-[60vh]"
+    style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
+  >
     {NARRATIVE_CONTENT.map((item, idx) => (
-      <div
-        key={item.id}
-        className="text-[8rem] font-black text-black leading-none opacity-20"
+      <motion.div
+        key={`${item.id}-${idx}`}
+        className="grid grid-cols-[80px_1fr] gap-8" // This aligns number and text side-by-side
+        onViewportEnter={() => setActiveIndex(idx)}
+        viewport={{ amount: 0.5 }}
       >
-        {idx + 1}
-      </div>
+        {/* THE NUMBER */}
+        <div className="text-7xl md:text-8xl font-black text-black opacity-20 sticky top-32 h-fit">
+          {item.id}
+        </div>
+
+        {/* THE TEXT */}
+        <div className="max-w-xl">
+          <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
+            Intelligence // {item.id}
+          </p>
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-black uppercase mb-8">
+            {item.title}
+          </h2>
+          <p className="text-xl md:text-xl font-medium leading-relaxed text-black/80">
+            {item.text}
+          </p>
+        </div>
+      </motion.div>
     ))}
+    <div className="h-[40vh]" />
   </div>
-</div>
 
-<div
-  className="py-32 px-8 space-y-[60vh]"
-  style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }}
->
-  {NARRATIVE_CONTENT.map((item, idx) => (
-    <motion.div
-      key={item.id}
-      className="max-w-xl"
-      onViewportEnter={() => setActiveIndex(idx)}
-      viewport={{ amount: 0.5 }}
-    >
-      <p className="text-[10px] font-black tracking-[0.6em] uppercase text-black/60 mb-8">
-        Node // {item.id}
-      </p>
-
-      <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-black uppercase mb-8">
-        {item.title}
-      </h2>
-
-      <p className="text-xl md:text-1xl font-medium leading-relaxed text-black/80">
-        {item.text}
-      </p>
-    </motion.div>
-  ))}
-
-  <div className="h-[40vh]" />
-</div>
-
-<div style={{ borderRight: "1px solid rgba(0,0,0,0.15)" }} />
-
-<div
-  className="hidden md:block sticky top-0 overflow-hidden"
+  {/* RIGHT PINNED IMAGE COLUMN */}
+  <div className="hidden md:block sticky top-0 h-screen col-span-2 overflow-hidden"
   style={{
     gridColumn: "4 / span 2",
     height: "100vh",
@@ -163,7 +151,7 @@ export default function CommunityPage() {
 
         {/* FOOTER SECTION */}
         <section className="h-screen flex items-center justify-center border-t border-black/10">
-          <h2 className="text-4xl md:text-8xl font-black tracking-tighter uppercase text-black opacity-10">
+  <h2 className="text-5xl md:text-[10vw] font-black tracking-tighter uppercase leading-none text-white opacity-40 text-center">
             Unity is the frequency
           </h2>
         </section>

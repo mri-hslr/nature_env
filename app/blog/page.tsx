@@ -6,7 +6,7 @@ import { BackgroundGradientAnimation } from "@/components/ui/background-gradient
 
 const NARRATIVE_CONTENT = [
   {
-    id: "intro",
+    id: "01",
     title: "When does an app become Web3?",
     text: "Short answer: 👉 An app becomes Web3 the moment user value is cryptographically owned, not when money is paid.",
     image: "https://images.unsplash.com/photo-1551244072-5d12893278ab?q=80&w=2000"

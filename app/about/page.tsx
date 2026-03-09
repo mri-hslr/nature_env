@@ -11,14 +11,14 @@ const corePillars = [
   { id: 1, text: "Mittal Maurya", color: "#7dd3fc", img: "c1.jpeg" },
   { id: 2, text: "Anjay Anil", color: "#10b981", img: "c2.avif" },
   { id: 3, text: "Rajat Mukherjee", color: "#0ea5e9", img: "c4.avif" },
-  { id: 4, text: "Victoria Schaw", color: "#8b5cf6", img: "c5.avif" },
-  { id: 5, text: "Hazel Paige", color: "#f43f5e", img: "c3.avif" },
-  { id: 6, text: "Prerna", color: "#7dd3fc", img: "c6.avif" },
-  { id: 7, text: "Oshib", color: "#10b981", img: "c7.avif" },
-  { id: 8, text: "Mercy", color: "#f43f5e", img: "c8.avif" },
-  { id: 9, text: "Arya", color: "#0ea5e9", img: "c9.avif" },
-  { id: 10, text: "(Nikki) Paarbati Tamang", color: "#8b5cf6", img: "c10.avif" },
-  { id: 11, text: "Divyanshi Mishra", color: "#0ea5e9", img: "c11.avif" },
+  //{ id: 4, text: "Victoria Schaw", color: "#8b5cf6", img: "c5.avif" },
+  //{ id: 5, text: "Hazel Paige", color: "#f43f5e", img: "c3.avif" },
+  //{ id: 6, text: "Prerna", color: "#7dd3fc", img: "c6.avif" },
+  //{ id: 7, text: "Oshib", color: "#10b981", img: "c7.avif" },
+  //{ id: 8, text: "Mercy", color: "#f43f5e", img: "c8.avif" },
+ // { id: 9, text: "Arya", color: "#0ea5e9", img: "c9.avif" },
+  //{ id: 10, text: "(Nikki) Paarbati Tamang", color: "#8b5cf6", img: "c10.avif" },
+  //{ id: 11, text: "Divyanshi Mishra", color: "#0ea5e9", img: "c11.avif" },
 ];
 
 export default function AboutPage() {
