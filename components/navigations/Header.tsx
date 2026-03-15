@@ -80,11 +80,14 @@ export const Header = () => {
         </Link>
 
         {/* SHOPPING CART ICON */}
-        <button className="relative text-white opacity-60 hover:opacity-100 transition-opacity duration-300 flex items-center leading-none mt-[-2px]">
-          <ShoppingCart size={16} strokeWidth={2.5} />
-          {/* Optional: Simple Emerald Dot to indicate items */}
-          <span className="absolute -top-1 -right-1.5 w-2 h-2 bg-[#10b981] rounded-full shadow-[0_0_8px_#10b981]" />
-        </button>
+        <Link 
+  href="/estore" 
+  className="relative text-white opacity-60 hover:opacity-100 transition-opacity duration-300 flex items-center leading-none mt-[-2px]"
+>
+  <ShoppingCart size={16} strokeWidth={2.5} />
+  {/* The emerald dot maintains brand consistency */}
+  <span className="absolute -top-1 -right-1.5 w-2 h-2 bg-[#10b981] rounded-full shadow-[0_0_8px_#10b981]" />
+</Link>
       </div>
     </motion.nav>
   );
